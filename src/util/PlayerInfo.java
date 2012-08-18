@@ -24,7 +24,7 @@ public class PlayerInfo {
    private String email;
    private String loginID;
    private String password;
-   private String gameID;
+   private String gameID;//once set, can't change.
 //===========================setters & getters==================================
     /**
      * @return the firstName
