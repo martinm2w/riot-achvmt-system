@@ -10,7 +10,7 @@ package entities;
  * @author ruobo
  * @lastupdate Aug 17, 2012 
  */
-public class Player {
+public class Achievment {
 //===============================constructor====================================
 //==================================utils=======================================
 //==============================instance vars===================================
