@@ -9,27 +9,11 @@ package util;
  *
  * @author ruobo
  * @lastupdate Aug 17, 2012 
- * Number of attempted attacks
-Number of hits
-Total Amount of damage done
-Number of kills
-Number of “first hit” kills
-Number of assists
-Total number of spells cast
-Total spell damage done
-Total time played
  */
 public class PlayerCurrGameStats {
 //===============================constructor====================================
     public PlayerCurrGameStats(){
-        this.setAssists(0);
-        this.setFirst_hit_kills(0);
-        this.setKills(0);
-        this.setPhysical_damage_done(0);
-        this.setPhysical_hits_num(0);
-        this.setSpell_cast_num(0);
-        this.setSpell_dmg_done(0);
-        this.setTime_played(0);
+
     }
 //==================================utils=======================================
     /**
@@ -66,6 +50,8 @@ public class PlayerCurrGameStats {
     private int first_hit_kills;
     
     private int time_played;
+    private int exp_earned;
+    private int ip_earned;
 //============================setters & getters=================================
 
     /**
