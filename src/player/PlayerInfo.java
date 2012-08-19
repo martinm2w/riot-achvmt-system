@@ -12,24 +12,21 @@ package player;
 public class PlayerInfo {
 //===============================constructor====================================
     public PlayerInfo(String firstName, String lastName, String email, String loginID, String password, String gameID){
-        this.setFirstName(firstName);
-        this.setLastName(lastName);
-        this.setEmail(email);
-        this.setLoginID(loginID);
-        this.setPassword(password);
-        this.setGameID(gameID); // can't change
-        this.setRiotPoints(RiotPoints);
     }
 //================================public========================================    
 //=================================private======================================
 //==============================instance vars===================================
-   private String firstName;
-   private String lastName;
-   private String email;
-   private String loginID;
-   private String password;
-   private String gameID;//once set, can't change.
-   private int RiotPoints;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String loginID;
+    private String password;
+    private String gameID;//once set, can't change.
+    private int level;
+    private int curr_level_exp;
+    private int next_level_exp;
+    private int riotPoints;
+    private int influencePoints;
 //===========================setters & getters==================================
     /**
      * @return the firstName
@@ -119,26 +116,5 @@ public class PlayerInfo {
         }else{
             System.out.println("You need to pay to your game ID!!");
         }
-    }
-
-    /**
-     * @return the RiotPoints
-     */
-    public int getRiotPoints() {
-        return RiotPoints;
-    }
-
-    /**
-     * @param RiotPoints the RiotPoints to set
-     */
-    public void setRiotPoints(int RiotPoints) {
-        this.RiotPoints = RiotPoints;
-    }
-    
-    /**
-     * @param RiotPoints the RiotPoints to add
-     */
-    public void addRiotPoints(int RiotPoints) {
-        this.RiotPoints += RiotPoints;
     }
 }
