@@ -16,12 +16,12 @@ public class Player {
 //===============================constructor====================================
     public Player(PlayerInfo info){
         this.setInfo(info);
-        hisStats = new HistoryStats();
+        hisStats = new PlayerHistoryStats();
     }
 //==================================utils=======================================
 //==============================instance vars===================================
     private PlayerInfo info;
-    private HistoryStats hisStats;
+    private PlayerHistoryStats hisStats;
 //============================setters & getters=================================
 
     /**

@@ -28,7 +28,7 @@ public class PlayerCurrGameStats {
      * @param time_played 
      * @lasteupdate 8/17/12 10:29 PM
      */
-    public void setPlyCurrGameStats(int physical_damage_done, int physical_hits_num, int spell_cast_num, int spell_dmg_done, int kills, int assists, int first_hit_kills, int time_played){
+    public void setPlyCurrGameStats(int physical_damage_done, int physical_hits_num, int spell_cast_num, int spell_dmg_done, int kills, int assists, int first_hit_kills, int time_played, int exp_earned, int ip_earned, String hero_used){
         this.setAssists(assists);
         this.setFirst_hit_kills(first_hit_kills);
         this.setKills(kills);
@@ -37,9 +37,13 @@ public class PlayerCurrGameStats {
         this.setSpell_cast_num(spell_cast_num);
         this.setSpell_dmg_done(spell_dmg_done);
         this.setTime_played(time_played);
+        this.setExp_earned(exp_earned);
+        this.setHero_used(hero_used);
+        this.setIp_earned(ip_earned);
     }
     
 //==============================instance vars===================================
+    private String hero_used;
     private int physical_damage_done;
     private int physical_hits_num;
     private int spell_cast_num;
@@ -52,6 +56,7 @@ public class PlayerCurrGameStats {
     private int time_played;
     private int exp_earned;
     private int ip_earned;
+    
 //============================setters & getters=================================
 
     /**
@@ -164,5 +169,47 @@ public class PlayerCurrGameStats {
      */
     public void setTime_played(int time_played) {
         this.time_played = time_played;
+    }
+
+    /**
+     * @return the hero_used
+     */
+    public String getHero_used() {
+        return hero_used;
+    }
+
+    /**
+     * @param hero_used the hero_used to set
+     */
+    public void setHero_used(String hero_used) {
+        this.hero_used = hero_used;
+    }
+
+    /**
+     * @return the exp_earned
+     */
+    public int getExp_earned() {
+        return exp_earned;
+    }
+
+    /**
+     * @param exp_earned the exp_earned to set
+     */
+    public void setExp_earned(int exp_earned) {
+        this.exp_earned = exp_earned;
+    }
+
+    /**
+     * @return the ip_earned
+     */
+    public int getIp_earned() {
+        return ip_earned;
+    }
+
+    /**
+     * @param ip_earned the ip_earned to set
+     */
+    public void setIp_earned(int ip_earned) {
+        this.ip_earned = ip_earned;
     }
 }
