@@ -17,6 +17,7 @@ public class PlayerInfo {
         this.setLoginID(loginID);
         this.setPassword(password);
         this.setGameID(gameID); // can't change
+        this.setRiotPoints(RiotPoints);
     }
 //==============================================================================    
    private String firstName;
@@ -25,6 +26,7 @@ public class PlayerInfo {
    private String loginID;
    private String password;
    private String gameID;//once set, can't change.
+   private int RiotPoints;
 //===========================setters & getters==================================
     /**
      * @return the firstName
@@ -114,5 +116,26 @@ public class PlayerInfo {
         }else{
             System.out.println("You need to pay to your game ID!!");
         }
+    }
+
+    /**
+     * @return the RiotPoints
+     */
+    public int getRiotPoints() {
+        return RiotPoints;
+    }
+
+    /**
+     * @param RiotPoints the RiotPoints to set
+     */
+    public void setRiotPoints(int RiotPoints) {
+        this.RiotPoints = RiotPoints;
+    }
+    
+    /**
+     * @param RiotPoints the RiotPoints to add
+     */
+    public void addRiotPoints(int RiotPoints) {
+        this.RiotPoints += RiotPoints;
     }
 }
