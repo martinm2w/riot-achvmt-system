@@ -19,8 +19,8 @@ public abstract class Achievement {
         this.setFulfilled(false);
     }
 //================================public========================================    
-    public abstract boolean checkAchvCriteria(PlayerHistoryStats hisStats);
-    public abstract void rewardIfFullfilled();
+    public abstract void checkAchvCriteria(Player player);
+    public abstract void rewardIfFullfilled(Player player);
 //=================================private======================================
 //==============================instance vars===================================
     private boolean fulfilled;

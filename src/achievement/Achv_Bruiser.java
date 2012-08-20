@@ -20,13 +20,18 @@ public class Achv_Bruiser extends Achievement {
 //================================public========================================    
 //=================================private======================================
     @Override
-    public boolean checkAchvCriteria(PlayerHistoryStats hisStats) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void checkAchvCriteria(Player player) {
+        int currGameDmg = player.getCurrStats().getphysical_dmg();
+        if(currGameDmg >= 500){
+            super.setFulfilled(true);
+        }
     }
 
     @Override
-    public void rewardIfFullfilled() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void rewardIfFullfilled(Player player) {
+        if(super.isFulfilled()){
+            player.setInfluencePoints(player.getInfluencePoints()+300);
+        }
     }
 //==============================instance vars===================================
 //============================setters & getters=================================

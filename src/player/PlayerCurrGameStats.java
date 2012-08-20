@@ -19,24 +19,24 @@ public class PlayerCurrGameStats {
 //=================================private======================================
     /**
      * m2w: the current game stats should be passed to the java platform system to update the user profile/stats.
-     * @param physical_damage_done
+     * @param physical_dmg
      * @param physical_hits_num
      * @param spell_cast_num
-     * @param spell_dmg_done
+     * @param spell_dmg
      * @param kills
      * @param assists
      * @param first_hit_kills
      * @param time_played 
      * @lasteupdate 8/17/12 10:29 PM
      */
-    public void setPlyCurrGameStats(int physical_damage_done, int physical_hits_num, int spell_cast_num, int spell_dmg_done, int kills, int assists, int first_hit_kills, int time_played, int exp_earned, int ip_earned, String hero_used){
+    public void setPlyCurrGameStats(int physical_dmg, int physical_hits_num, int spell_cast_num, int spell_dmg, int kills, int assists, int first_hit_kills, int time_played, int exp_earned, int ip_earned, String hero_used){
         this.setAssists(assists);
         this.setFirst_hit_kills(first_hit_kills);
         this.setKills(kills);
-        this.setPhysical_damage_done(physical_damage_done);
+        this.setphysical_dmg(physical_dmg);
         this.setPhysical_hits_num(physical_hits_num);
         this.setSpell_cast_num(spell_cast_num);
-        this.setSpell_dmg_done(spell_dmg_done);
+        this.setspell_dmg(spell_dmg);
         this.setTime_played(time_played);
         this.setExp_earned(exp_earned);
         this.setHero_used(hero_used);
@@ -45,10 +45,10 @@ public class PlayerCurrGameStats {
     
 //==============================instance vars===================================
     private String hero_used;
-    private int physical_damage_done;
+    private int physical_dmg;
     private int physical_hits_num;
     private int spell_cast_num;
-    private int spell_dmg_done;
+    private int spell_dmg;
     
     private int kills;
     private int assists;
@@ -61,17 +61,17 @@ public class PlayerCurrGameStats {
 //============================setters & getters=================================
 
     /**
-     * @return the physical_damage_done
+     * @return the physical_dmg
      */
-    public int getPhysical_damage_done() {
-        return physical_damage_done;
+    public int getphysical_dmg() {
+        return physical_dmg;
     }
 
     /**
-     * @param physical_damage_done the physical_damage_done to set
+     * @param physical_dmg the physical_dmg to set
      */
-    public void setPhysical_damage_done(int physical_damage_done) {
-        this.physical_damage_done = physical_damage_done;
+    public void setphysical_dmg(int physical_dmg) {
+        this.physical_dmg = physical_dmg;
     }
 
     /**
@@ -103,17 +103,17 @@ public class PlayerCurrGameStats {
     }
 
     /**
-     * @return the spell_dmg_done
+     * @return the spell_dmg
      */
-    public int getSpell_dmg_done() {
-        return spell_dmg_done;
+    public int getspell_dmg() {
+        return spell_dmg;
     }
 
     /**
-     * @param spell_dmg_done the spell_dmg_done to set
+     * @param spell_dmg the spell_dmg to set
      */
-    public void setSpell_dmg_done(int spell_dmg_done) {
-        this.spell_dmg_done = spell_dmg_done;
+    public void setspell_dmg(int spell_dmg) {
+        this.spell_dmg = spell_dmg;
     }
 
     /**

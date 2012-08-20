@@ -3,26 +3,17 @@
  * and open the template in the editor.
  */
 
-package heroes;
-
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
+package player;
 
 /**
  *
  * @author ruobo
  * @lastupdate Aug 19, 2012 
  */
-public abstract class Hero {
+public class SommonerSpell {
 //===============================constructor====================================
 //==================================public======================================
 //=================================private======================================
 //==============================instance vars===================================
-    private String heroName;
-    private String lore;
-    private String tipsAndItems;
-    private ArrayList<Ability> abilities;
-    private BufferedImage art;
-    private BufferedImage portait;
 //============================setters & getters=================================
 }
