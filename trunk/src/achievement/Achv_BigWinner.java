@@ -19,13 +19,16 @@ public class Achv_BigWinner extends Achievement{
     }
 //================================public========================================    
     @Override
-    public boolean checkAchvCriteria(PlayerHistoryStats hisStats) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void checkAchvCriteria(Player player) {
+        int totalWin = player.getHisStats().getTotal_wins();
+        if(totalWin>=200){
+            super.setFulfilled(true);
+        }
     }
 
     @Override
-    public void rewardIfFullfilled() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void rewardIfFullfilled(Player player) {
+        player.setInfluencePoints(player.getInfluencePoints()+100);
     }
 //=================================private======================================
 //==============================instance vars===================================

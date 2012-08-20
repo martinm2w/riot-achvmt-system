@@ -25,10 +25,10 @@ public class Achievements_handler {
         this.allAchvmnts.put(veteran.getAchv_name(), veteran);
     }
 //================================public========================================    
-    public void updateAchvmntsStats(PlayerHistoryStats hisStats){
+    public void updateAchvmntsStats(Player player){
         for(String achvName : allAchvmnts.keySet()){
             Achievement tmpAchv = allAchvmnts.get(achvName);
-            tmpAchv.checkAchvCriteria(hisStats);
+            tmpAchv.checkAchvCriteria(player);
         }
     }
     
@@ -36,11 +36,11 @@ public class Achievements_handler {
      * m2w: check achvmnts if any of them fulfilled  and reward if did.
      * @lastupdate 8/19/12 1:00 PM
      */
-    public void checkFulfilledAchvmnts(){
+    public void checkFulfilledAchvmnts(Player player){
         for(String achvName : allAchvmnts.keySet()){
             Achievement tmpAchv = allAchvmnts.get(achvName);
             if(tmpAchv.isFulfilled()){
-                tmpAchv.rewardIfFullfilled();
+                tmpAchv.rewardIfFullfilled(player);
             }
         }
     }

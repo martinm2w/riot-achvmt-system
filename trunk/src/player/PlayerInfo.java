@@ -22,11 +22,7 @@ public class PlayerInfo {
     private String loginID;
     private String password;
     private String gameID;//once set, can't change.
-    private int level;
-    private int curr_level_exp;
-    private int next_level_exp;
-    private int riotPoints;
-    private int influencePoints;
+    
 //===========================setters & getters==================================
     /**
      * @return the firstName

@@ -19,12 +19,12 @@ public class Achv_SharpShooter extends Achievement {
     }
 
     @Override
-    public boolean checkAchvCriteria(PlayerHistoryStats hisStats) {
+    public void checkAchvCriteria(Player player) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void rewardIfFullfilled() {
+    public void rewardIfFullfilled(Player player) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 //===============================constructor====================================
