@@ -20,12 +20,27 @@ public class Achv_SharpShooter extends Achievement {
 
     @Override
     public void checkAchvCriteria(Player player) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        if(player ==null) return;
+        int totalHit = player.getCurrStats().getPhysical_hits_num();
+        int totalMiss = player.getCurrStats().getPhysical_miss_num();
+        double accuracy = (double)totalHit / (double)(totalHit+totalMiss);
+        if(accuracy >= 0.75){
+            super.setFulfilled(true);
+        }
+        
     }
 
+    /**
+     * m2w: reward 50 ip if fulfilled sharpshooter
+     * @param player 
+     * @lastupdate 8/20/12 3:37 PM
+     */
     @Override
     public void rewardIfFullfilled(Player player) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        if(player ==null) return;
+        if(super.isFulfilled()){
+            player.setInfluencePoints(player.getInfluencePoints() + 50);
+        }
     }
 //===============================constructor====================================
 //================================public========================================    

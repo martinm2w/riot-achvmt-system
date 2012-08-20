@@ -21,12 +21,24 @@ public class Achv_Veteran extends Achievement {
 //=================================private======================================
     @Override
     public void checkAchvCriteria(Player player) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        if(player == null) return;
+        int gamesPlayed = player.getHisStats().getGames_played();
+        if(gamesPlayed >= 1000){
+            super.setFulfilled(true);
+        }
     }
 
+    /**
+     * m2w: 
+     * @param player current player
+     * @lastupdate 8/20/12 3:37 PM
+     */
     @Override
     public void rewardIfFullfilled(Player player) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        if(player == null) return;
+        if(super.isFulfilled()){
+            player.setInfluencePoints(player.getInfluencePoints()+200);
+        }
     }
 //==============================instance vars===================================
 //============================setters & getters=================================

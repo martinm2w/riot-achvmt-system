@@ -29,12 +29,13 @@ public class PlayerCurrGameStats {
      * @param time_played 
      * @lasteupdate 8/17/12 10:29 PM
      */
-    public void setPlyCurrGameStats(int physical_dmg, int physical_hits_num, int spell_cast_num, int spell_dmg, int kills, int assists, int first_hit_kills, int time_played, int exp_earned, int ip_earned, String hero_used){
+    public void setPlyCurrGameStats(int physical_dmg, int physical_hits_num, int physical_miss_num, int spell_cast_num, int spell_dmg, int kills, int assists, int first_hit_kills, int time_played, int exp_earned, int ip_earned, String hero_used){
         this.setAssists(assists);
         this.setFirst_hit_kills(first_hit_kills);
         this.setKills(kills);
         this.setphysical_dmg(physical_dmg);
         this.setPhysical_hits_num(physical_hits_num);
+        this.setPhysical_miss_num(physical_miss_num);
         this.setSpell_cast_num(spell_cast_num);
         this.setspell_dmg(spell_dmg);
         this.setTime_played(time_played);
@@ -47,6 +48,7 @@ public class PlayerCurrGameStats {
     private String hero_used;
     private int physical_dmg;
     private int physical_hits_num;
+    private int physical_miss_num;
     private int spell_cast_num;
     private int spell_dmg;
     
@@ -212,5 +214,19 @@ public class PlayerCurrGameStats {
      */
     public void setIp_earned(int ip_earned) {
         this.ip_earned = ip_earned;
+    }
+
+    /**
+     * @return the physical_miss_num
+     */
+    public int getPhysical_miss_num() {
+        return physical_miss_num;
+    }
+
+    /**
+     * @param physical_miss_num the physical_miss_num to set
+     */
+    public void setPhysical_miss_num(int physical_miss_num) {
+        this.physical_miss_num = physical_miss_num;
     }
 }
