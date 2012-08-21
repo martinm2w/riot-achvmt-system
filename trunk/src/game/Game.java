@@ -29,11 +29,11 @@ public class Game {
     public void gameStart(){
         /*blue team*/
         for(Player p : blue_team){
-            int physical_dmg = Math.random()*200000;
+            int physical_dmg = (int)Math.random()*200000;
+            int physical_hits_num = (int)Math.random()*200000;
             p.getCurrStats().updatePlayerCurrGameStats(physical_dmg, physical_hits_num, physical_miss_num, spell_cast_num, spell_dmg, kills, assists, first_hit_kills, time_played, exp_earned, ip_earned, Heros.heros.get(p));
         }
         /*purple team*/
-        
     }
     
     /**
