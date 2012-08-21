@@ -5,6 +5,10 @@
 
 package process;
 
+import game.*;
+import java.util.*;
+import player.*;
+
 /**
  *
  * @author ruobo
@@ -13,6 +17,11 @@ package process;
 public class MatchProcess {
 //===============================constructor====================================
 //==================================public======================================
+    public static void main(String[] args){
+        ArrayList<Player> blue_team = new ArrayList<Player>();
+        ArrayList<Player> purple_team = new ArrayList<Player>();
+        Game game1 = new Game(purple_team, blue_team);
+    }
 //=================================private======================================
 //==============================instance vars===================================
 //============================setters & getters=================================
