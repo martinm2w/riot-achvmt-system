@@ -25,12 +25,21 @@ public class Game {
 //================================public========================================        
     /**
      * m2w: this method simulates the game process, generate each player's behavior for end game results.
+     * for simplicity, ignored that total blue kill should equals to total purple deaths.
      */
     public void gameStart(){
         /*blue team*/
         for(Player p : blue_team){
             int physical_dmg = (int)Math.random()*200000;
-            int physical_hits_num = (int)Math.random()*200000;
+            int physical_hits_num = (int)Math.random()*2000;
+            int physical_miss_num = (int)Math.random()*1000; // misses are set at most half of hits
+            int spell_cast_num = (int)Math.random()*1500;
+            int spell_dmg = (int)Math.random()*200000;
+            int kills = (int)Math.random()*30;
+            int assists = (int)Math.random()*30;
+            int first_hit_kills = (int)Math.random()*3;
+            int time_played = this.getElapsedTime();
+            
             p.getCurrStats().updatePlayerCurrGameStats(physical_dmg, physical_hits_num, physical_miss_num, spell_cast_num, spell_dmg, kills, assists, first_hit_kills, time_played, exp_earned, ip_earned, Heros.heros.get(p));
         }
         /*purple team*/
@@ -47,6 +56,7 @@ public class Game {
     private ArrayList<Player> purple_team;
     private ArrayList<Player> blue_team;
     private boolean hasEnded = false;
+    private int elapsedTime =  (int)(Math.random()*(40)) + 20; //no surrender before 20
 //============================setters & getters=================================
 
     /**
@@ -89,5 +99,19 @@ public class Game {
      */
     public void setHasEnded(boolean hasEnded) {
         this.hasEnded = hasEnded;
+    }
+
+    /**
+     * @return the elapsedTime
+     */
+    public int getElapsedTime() {
+        return elapsedTime;
+    }
+
+    /**
+     * @param elapsedTime the elapsedTime to set
+     */
+    public void setElapsedTime(int elapsedTime) {
+        this.elapsedTime = elapsedTime;
     }
 }
