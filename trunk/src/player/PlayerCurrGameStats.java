@@ -5,6 +5,8 @@
 
 package player;
 
+import heroes.Hero;
+
 /**
  *
  * @author ruobo
@@ -29,7 +31,7 @@ public class PlayerCurrGameStats {
      * @param time_played 
      * @lasteupdate 8/17/12 10:29 PM
      */
-    public void updatePlayerCurrGameStats(int physical_dmg, int physical_hits_num, int physical_miss_num, int spell_cast_num, int spell_dmg, int kills, int assists, int first_hit_kills, int time_played, int exp_earned, int ip_earned, String hero_used){
+    public void updatePlayerCurrGameStats(int physical_dmg, int physical_hits_num, int physical_miss_num, int spell_cast_num, int spell_dmg, int kills, int assists, int first_hit_kills, int time_played, int exp_earned, int ip_earned, Hero hero_used){
         this.setAssists(assists);
         this.setFirst_hit_kills(first_hit_kills);
         this.setKills(kills);
@@ -45,7 +47,7 @@ public class PlayerCurrGameStats {
     }
     
 //==============================instance vars===================================
-    private String hero_used;
+    private Hero hero_used; //simulating the real game that you can see hero's portaits in the match result (can use HeroObj.getHeroProtrait()).
     private int physical_dmg;
     private int physical_hits_num;
     private int physical_miss_num;
@@ -177,14 +179,14 @@ public class PlayerCurrGameStats {
     /**
      * @return the hero_used
      */
-    public String getHero_used() {
+    public Hero getHero_used() {
         return hero_used;
     }
 
     /**
      * @param hero_used the hero_used to set
      */
-    public void setHero_used(String hero_used) {
+    public void setHero_used(Hero hero_used) {
         this.hero_used = hero_used;
     }
 
