@@ -14,6 +14,10 @@ import java.util.*;
  */
 public class Heros {
 //===============================constructor====================================
+    static{
+        herosMap = Heros.initHeroes();
+        heroesList = Heros.intiHeroesList();
+    }
 //==================================public======================================
 //=================================private======================================
     /**
@@ -22,7 +26,7 @@ public class Heros {
      * 10 heroes for the sake of simplicity(my favs).
      * @return initialized map of heros
      */
-    private static HashMap<String, Hero> initHeros(){
+    private static HashMap<String, Hero> initHeroes(){
         HashMap<String, Hero> herosObj = new HashMap<String, Hero>();
         herosObj.put("ashe", new Hero("ashe"));
         herosObj.put("anivia", new Hero("anivia"));
@@ -36,7 +40,14 @@ public class Heros {
         herosObj.put("evelynn", new Hero("evelynn"));
         return herosObj;
     }
+    
+    private static ArrayList<Hero> intiHeroesList(){
+        ArrayList<Hero> heroesListObj = new ArrayList<Hero>();
+        heroesListObj.addAll(herosMap.values());
+        return heroesListObj;
+    }
 //==============================instance vars===================================
-    public static HashMap<String, Hero> heros = initHeros();
+    public static HashMap<String, Hero> herosMap;
+    public static ArrayList<Hero> heroesList;
 //============================setters & getters=================================
 }

@@ -28,8 +28,13 @@ public class Game {
      * for simplicity, ignored that total blue kill should equals to total purple deaths.
      */
     public void gameStart(){
+        /*generate winner*/
+        int winRand = (int)Math.random()*10;
+        if(winRand >= 5) blueWins = true;
+        
         /*blue team*/
-        for(Player p : blue_team){
+        for(int i = 0; i < this.getBlue_team().size(); i ++){
+            Player p = this.getBlue_team().get(i);
             int physical_dmg = (int)Math.random()*200000;
             int physical_hits_num = (int)Math.random()*2000;
             int physical_miss_num = (int)Math.random()*1000; // misses are set at most half of hits
@@ -39,10 +44,18 @@ public class Game {
             int assists = (int)Math.random()*30;
             int first_hit_kills = (int)Math.random()*3;
             int time_played = this.getElapsedTime();
+            int exp_earned = (int)Math.random()*200;
+            int ip_earned = (int)Math.random()*100;
+            if(blueWins){
+                exp_earned+=200;
+                ip_earned+=100;
+            }
             
-            p.getCurrStats().updatePlayerCurrGameStats(physical_dmg, physical_hits_num, physical_miss_num, spell_cast_num, spell_dmg, kills, assists, first_hit_kills, time_played, exp_earned, ip_earned, Heros.heros.get(p));
+            p.getCurrStats().updatePlayerCurrGameStats(physical_dmg, physical_hits_num, physical_miss_num, spell_cast_num, spell_dmg, kills, assists, first_hit_kills, time_played, exp_earned, ip_earned, Heros.heroesList.get(i));
         }
         /*purple team*/
+        
+        
     }
     
     /**
@@ -57,6 +70,7 @@ public class Game {
     private ArrayList<Player> blue_team;
     private boolean hasEnded = false;
     private int elapsedTime =  (int)(Math.random()*(40)) + 20; //no surrender before 20
+    private boolean blueWins = false;
 //============================setters & getters=================================
 
     /**
