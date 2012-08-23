@@ -14,27 +14,30 @@ import heroes.Hero;
  */
 public class PlayerCurrGameStats {
 //===============================constructor====================================
-    public PlayerCurrGameStats(){
-
-    }
-//================================public========================================    
-//=================================private======================================
     /**
      * m2w: the current game stats should be passed to the java platform system to update the user profile/stats.
      * @param physical_dmg
      * @param physical_hits_num
+     * @param physical_miss_num
      * @param spell_cast_num
      * @param spell_dmg
      * @param kills
+     * @param deaths
      * @param assists
      * @param first_hit_kills
-     * @param time_played 
-     * @lasteupdate 8/17/12 10:29 PM
+     * @param time_played
+     * @param exp_earned
+     * @param ip_earned
+     * @param hero_used
+     * @param csCount
+     * @param towersTaken 
+     * @lastupdate 8/22/12 11:18 PM
      */
-    public void updatePlayerCurrGameStats(int physical_dmg, int physical_hits_num, int physical_miss_num, int spell_cast_num, int spell_dmg, int kills, int assists, int first_hit_kills, int time_played, int exp_earned, int ip_earned, Hero hero_used){
+    public PlayerCurrGameStats(int physical_dmg, int physical_hits_num, int physical_miss_num, int spell_cast_num, int spell_dmg, int kills, int deaths, int assists, int first_hit_kills, int time_played, int exp_earned, int ip_earned, Hero hero_used, int csCount, int towersTaken){
         this.setAssists(assists);
         this.setFirst_hit_kills(first_hit_kills);
         this.setKills(kills);
+        this.setDeaths(deaths);
         this.setphysical_dmg(physical_dmg);
         this.setPhysical_hits_num(physical_hits_num);
         this.setPhysical_miss_num(physical_miss_num);
@@ -44,6 +47,48 @@ public class PlayerCurrGameStats {
         this.setExp_earned(exp_earned);
         this.setHero_used(hero_used);
         this.setIp_earned(ip_earned);
+        this.setCsCount(csCount);
+        this.setTowersTaken(towersTaken);
+    }
+//================================public========================================    
+//=================================private======================================
+    
+    /**
+     * M2w: update-able
+     * @param physical_dmg
+     * @param physical_hits_num
+     * @param physical_miss_num
+     * @param spell_cast_num
+     * @param spell_dmg
+     * @param kills
+     * @param deaths
+     * @param assists
+     * @param first_hit_kills
+     * @param time_played
+     * @param exp_earned
+     * @param ip_earned
+     * @param hero_used
+     * @param csCount
+     * @param towersTaken
+     * @lastupdate 8/22/12 11:18 PM
+     */
+    public void updatePlayerCurrGameStats(int physical_dmg, int physical_hits_num, int physical_miss_num, int spell_cast_num, int spell_dmg, int kills, int deaths, int assists, int first_hit_kills, int time_played, int exp_earned, int ip_earned, Hero hero_used, int csCount, int towersTaken){
+        this.setAssists(assists);
+        this.setFirst_hit_kills(first_hit_kills);
+        this.setKills(kills);
+        this.setDeaths(deaths);
+        this.setphysical_dmg(physical_dmg);
+        this.setPhysical_hits_num(physical_hits_num);
+        this.setPhysical_miss_num(physical_miss_num);
+        this.setSpell_cast_num(spell_cast_num);
+        this.setspell_dmg(spell_dmg);
+        this.setTime_played(time_played);
+        this.setExp_earned(exp_earned);
+        this.setHero_used(hero_used);
+        this.setIp_earned(ip_earned);
+        this.setCsCount(csCount);
+        this.setTowersTaken(towersTaken);
+        
     }
     
 //==============================instance vars===================================
@@ -55,8 +100,11 @@ public class PlayerCurrGameStats {
     private int spell_dmg;
     
     private int kills;
+    private int deaths;
     private int assists;
     private int first_hit_kills;
+    private int csCount;
+    private int towersTaken;
     
     private int time_played;
     private int exp_earned;
@@ -230,5 +278,47 @@ public class PlayerCurrGameStats {
      */
     public void setPhysical_miss_num(int physical_miss_num) {
         this.physical_miss_num = physical_miss_num;
+    }
+
+    /**
+     * @return the deaths
+     */
+    public int getDeaths() {
+        return deaths;
+    }
+
+    /**
+     * @param deaths the deaths to set
+     */
+    public void setDeaths(int deaths) {
+        this.deaths = deaths;
+    }
+
+    /**
+     * @return the csCount
+     */
+    public int getCsCount() {
+        return csCount;
+    }
+
+    /**
+     * @param csCount the csCount to set
+     */
+    public void setCsCount(int csCount) {
+        this.csCount = csCount;
+    }
+
+    /**
+     * @return the towersTaken
+     */
+    public int getTowersTaken() {
+        return towersTaken;
+    }
+
+    /**
+     * @param towersTaken the towersTaken to set
+     */
+    public void setTowersTaken(int towersTaken) {
+        this.towersTaken = towersTaken;
     }
 }

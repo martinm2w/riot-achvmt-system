@@ -21,6 +21,7 @@ public class Game {
     public Game(ArrayList<Player> purple_team, ArrayList<Player> blue_team){
         this.setBlue_team(blue_team);
         this.setPurple_team(purple_team);
+        
     }
 //================================public========================================        
     /**
@@ -32,30 +33,89 @@ public class Game {
         int winRand = (int)Math.random()*10;
         if(winRand >= 5) blueWins = true;
         
+        if(blueWins){//if blue team wins, given blue team 20 more kills
+            setTotalBlueKills((int)Math.random()*50+20);
+            setTotalPurpleKills((int)Math.random()*50);
+        }else{//else give purple team 20 more kills.
+            setTotalBlueKills((int)Math.random()*50);
+            setTotalPurpleKills((int)Math.random()*50+20);
+        }
+        
+        /* KDAs*/
+        int blueKillsLeft = getTotalBlueKills();     //these 2 "left" vars are for assigning each players kills. substracting players kills from it each time.
+        int purpleKillsLeft = getTotalPurpleKills(); //
+        int blueDeathsLeft = getTotalPurpleKills();  //these 2 are for the deaths for each player.
+        int purpleDeathsLeft = getTotalBlueKills();  //total blue kills should match total purple deaths.
+                                                //assists will generate randomly between 0-20
+        int towersTakenBlue = 11;
+        int towersTakenPurple = 11;
+                                               
         /*blue team*/
         for(int i = 0; i < this.getBlue_team().size(); i ++){
             Player p = this.getBlue_team().get(i);
+            
+            /*dmg*/
             int physical_dmg = (int)Math.random()*200000;
             int physical_hits_num = (int)Math.random()*2000;
             int physical_miss_num = (int)Math.random()*1000; // misses are set at most half of hits
             int spell_cast_num = (int)Math.random()*1500;
             int spell_dmg = (int)Math.random()*200000;
-            int kills = (int)Math.random()*30;
-            int assists = (int)Math.random()*30;
-            int first_hit_kills = (int)Math.random()*3;
+            int csCount = (int)Math.random()*400;            // should be related to game time, omitted for simplicity here.
+            
+            /*KDAs*/
+            int kills = (int)Math.random()*blueKillsLeft; 
+            blueKillsLeft -= kills;
+            int deaths = (int)Math.random()*blueDeathsLeft;
+            blueDeathsLeft -= deaths;
+            int towersTaken = (int)Math.random()*towersTakenBlue;
+            towersTakenBlue -= towersTaken;
+            int assists = (int)Math.random()*20;
+            
+            int first_hit_kills = (int)Math.random()*kills; //
             int time_played = this.getElapsedTime();
             int exp_earned = (int)Math.random()*200;
             int ip_earned = (int)Math.random()*100;
-            if(blueWins){
+            if(blueWins){//if blue wins , get more exp and ip
+                exp_earned+=200;
+                ip_earned+=100;
+            }
+//            System.out.println(p.getCurrStats());
+            PlayerCurrGameStats curStats = new PlayerCurrGameStats(physical_dmg, physical_hits_num, physical_miss_num, spell_cast_num, spell_dmg, kills, deaths, assists, first_hit_kills, time_played, exp_earned, ip_earned, Heros.heroesList.get(i), csCount, towersTaken);
+            p.setCurrStats(curStats);
+        }
+        /*purple team*/
+        for(int i = 0; i < this.getPurple_team().size(); i ++){
+            Player p = this.getPurple_team().get(i);
+            
+            /*dmg*/
+            int physical_dmg = (int)Math.random()*200000;
+            int physical_hits_num = (int)Math.random()*2000;
+            int physical_miss_num = (int)Math.random()*1000; // misses are set at most half of hits
+            int spell_cast_num = (int)Math.random()*1500;
+            int spell_dmg = (int)Math.random()*200000;
+            int csCount = (int)Math.random()*400;            // should be related to game time, omitted for simplicity here.
+            
+            /*KDAs*/
+            int kills = (int)Math.random()*purpleKillsLeft; 
+            blueKillsLeft -= kills;
+            int deaths = (int)Math.random()*purpleDeathsLeft;
+            blueDeathsLeft -= deaths;
+            int towersTaken = (int)Math.random()*towersTakenPurple;
+            towersTakenPurple -= towersTaken;
+            int assists = (int)Math.random()*20;
+            
+            int first_hit_kills = (int)Math.random()*kills; //
+            int time_played = this.getElapsedTime();
+            int exp_earned = (int)Math.random()*200;
+            int ip_earned = (int)Math.random()*100;
+            if(!blueWins){//if blue lost, purple wins, get more ip and exp.
                 exp_earned+=200;
                 ip_earned+=100;
             }
             
-            p.getCurrStats().updatePlayerCurrGameStats(physical_dmg, physical_hits_num, physical_miss_num, spell_cast_num, spell_dmg, kills, assists, first_hit_kills, time_played, exp_earned, ip_earned, Heros.heroesList.get(i));
+            PlayerCurrGameStats curStats = new PlayerCurrGameStats(physical_dmg, physical_hits_num, physical_miss_num, spell_cast_num, spell_dmg, kills, deaths, assists, first_hit_kills, time_played, exp_earned, ip_earned, Heros.heroesList.get(i), csCount, towersTaken);
+            p.setCurrStats(curStats);
         }
-        /*purple team*/
-        
-        
     }
     
     /**
@@ -71,6 +131,8 @@ public class Game {
     private boolean hasEnded = false;
     private int elapsedTime =  (int)(Math.random()*(40)) + 20; //no surrender before 20
     private boolean blueWins = false;
+    private int totalBlueKills = 0;
+    private int totalPurpleKills = 0;
 //============================setters & getters=================================
 
     /**
@@ -104,7 +166,7 @@ public class Game {
     /**
      * @return the hasEnded
      */
-    public boolean isHasEnded() {
+    public boolean hasEnded() {
         return hasEnded;
     }
 
@@ -127,5 +189,33 @@ public class Game {
      */
     public void setElapsedTime(int elapsedTime) {
         this.elapsedTime = elapsedTime;
+    }
+
+    /**
+     * @return the totalBlueKills
+     */
+    public int getTotalBlueKills() {
+        return totalBlueKills;
+    }
+
+    /**
+     * @param totalBlueKills the totalBlueKills to set
+     */
+    public void setTotalBlueKills(int totalBlueKills) {
+        this.totalBlueKills = totalBlueKills;
+    }
+
+    /**
+     * @return the totalPurpleKills
+     */
+    public int getTotalPurpleKills() {
+        return totalPurpleKills;
+    }
+
+    /**
+     * @param totalPurpleKills the totalPurpleKills to set
+     */
+    public void setTotalPurpleKills(int totalPurpleKills) {
+        this.totalPurpleKills = totalPurpleKills;
     }
 }

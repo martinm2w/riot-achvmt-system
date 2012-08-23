@@ -46,7 +46,7 @@ public class Achievements_handler {
     }
 //=================================private======================================
 //==============================instance vars===================================
-    private HashMap<String, Achievement> allAchvmnts;
+    private HashMap<String, Achievement> allAchvmnts = new HashMap<String, Achievement>();
 //============================setters & getters=================================
 
     /**
