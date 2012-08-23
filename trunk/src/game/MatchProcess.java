@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package process;
+package game;
 
 import game.*;
 import java.util.*;
@@ -24,11 +24,13 @@ public class MatchProcess {
         Game game = new Game(purple_team, blue_team);
         game.gameStart();
         game.gameEnd();
-        System.out.println(blue_team.get(0).getInfo().getGameID());
-        System.out.println(blue_team.get(0).getCurrStats().getCsCount());
         if(game.hasEnded()){
             mp.printGameSummary(game);
         }
+        
+        int i = (true)? 3:4;
+//        int i = (int)(Math.random()*50);
+        System.out.println(i);
     }
 //=================================private======================================
     /**
@@ -40,6 +42,7 @@ public class MatchProcess {
         ArrayList<Player> blue_team = new ArrayList<Player>();
         for(int i = 1; i <=5; i++){
             PlayerInfo info = new PlayerInfo("blue"+i+"FN", "blue"+i+"LN", "blue"+i+"Email", "blue"+i+"ID", "blue"+i+"PW" , "blue"+i+"gameID");
+//            System.out.println(info.getFirstName());
             Player player = new Player(info);
             blue_team.add(player);
         }
@@ -62,8 +65,6 @@ public class MatchProcess {
     }
     
     private void printGameSummary(Game game){
-        
-        
         
         System.out.println("========================================================================================");
         System.out.println("\t SummonerID \t K\\D\\A \t Items \t CS count \t towers taken\t");
