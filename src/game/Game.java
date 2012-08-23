@@ -51,6 +51,20 @@ public class Game {
         int towersTakenPurple = 11;
                                                
         /*blue team*/
+        this.setBlueCurrStats(blueKillsLeft, blueDeathsLeft, towersTakenBlue);
+        /*purple team*/
+        this.setPurpleCurrStats(purpleKillsLeft, purpleDeathsLeft, towersTakenPurple);
+    }
+    
+    /**
+     * m2w: this method sets the game status to hasEnded.
+     */
+    public void gameEnd(){
+        this.setHasEnded(true);
+
+    }
+//=================================private======================================
+    private void setBlueCurrStats(int blueKillsLeft, int blueDeathsLeft, int towersTakenBlue){
         for(int i = 0; i < this.getBlue_team().size(); i ++){
             Player p = this.getBlue_team().get(i);
             
@@ -83,7 +97,9 @@ public class Game {
             PlayerCurrGameStats curStats = new PlayerCurrGameStats(physical_dmg, physical_hits_num, physical_miss_num, spell_cast_num, spell_dmg, kills, deaths, assists, first_hit_kills, time_played, exp_earned, ip_earned, Heros.heroesList.get(i), csCount, towersTaken);
             p.setCurrStats(curStats);
         }
-        /*purple team*/
+    }
+    
+    private void setPurpleCurrStats(int purpleKillsLeft, int purpleDeathsLeft, int towersTakenPurple){
         for(int i = 0; i < this.getPurple_team().size(); i ++){
             Player p = this.getPurple_team().get(i);
             
@@ -97,9 +113,9 @@ public class Game {
             
             /*KDAs*/
             int kills = (int)Math.random()*purpleKillsLeft; 
-            blueKillsLeft -= kills;
+            purpleDeathsLeft -= kills;
             int deaths = (int)Math.random()*purpleDeathsLeft;
-            blueDeathsLeft -= deaths;
+            purpleDeathsLeft -= deaths;
             int towersTaken = (int)Math.random()*towersTakenPurple;
             towersTakenPurple -= towersTaken;
             int assists = (int)Math.random()*20;
@@ -117,14 +133,6 @@ public class Game {
             p.setCurrStats(curStats);
         }
     }
-    
-    /**
-     * m2w: this method sets the game status to hasEnded.
-     */
-    public void gameEnd(){
-        this.setHasEnded(true);
-    }
-//=================================private======================================
 //==============================instance vars===================================
     private ArrayList<Player> purple_team;
     private ArrayList<Player> blue_team;

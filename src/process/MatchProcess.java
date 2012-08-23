@@ -24,6 +24,8 @@ public class MatchProcess {
         Game game = new Game(purple_team, blue_team);
         game.gameStart();
         game.gameEnd();
+        System.out.println(blue_team.get(0).getInfo().getGameID());
+        System.out.println(blue_team.get(0).getCurrStats().getCsCount());
         if(game.hasEnded()){
             mp.printGameSummary(game);
         }
@@ -60,6 +62,9 @@ public class MatchProcess {
     }
     
     private void printGameSummary(Game game){
+        
+        
+        
         System.out.println("========================================================================================");
         System.out.println("\t SummonerID \t K\\D\\A \t Items \t CS count \t towers taken\t");
         for(int i = 0; i < 5; i++){
