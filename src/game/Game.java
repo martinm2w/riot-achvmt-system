@@ -30,17 +30,20 @@ public class Game {
      */
     public void gameStart(){
         /*generate winner*/
-        int winRand = (int)Math.random()*10;
+        int winRand = (int)(Math.random()*10);
         if(winRand >= 5) blueWins = true;
         
         if(blueWins){//if blue team wins, given blue team 20 more kills
-            setTotalBlueKills((int)Math.random()*50+20);
-            setTotalPurpleKills((int)Math.random()*50);
+            setTotalBlueKills((int)(Math.random()*50)+20);
+            setTotalPurpleKills((int)(Math.random()*50));
         }else{//else give purple team 20 more kills.
-            setTotalBlueKills((int)Math.random()*50);
-            setTotalPurpleKills((int)Math.random()*50+20);
+            setTotalBlueKills((int)(Math.random()*50));
+            setTotalPurpleKills((int)(Math.random()*50)+20);
         }
-        
+        System.out.println(this.getTotalBlueKills());
+        System.out.println(this.getTotalPurpleKills());
+        System.out.println(this.blueWins);
+
         /* KDAs*/
         int blueKillsLeft = getTotalBlueKills();     //these 2 "left" vars are for assigning each players kills. substracting players kills from it each time.
         int purpleKillsLeft = getTotalPurpleKills(); //
@@ -69,26 +72,26 @@ public class Game {
             Player p = this.getBlue_team().get(i);
             
             /*dmg*/
-            int physical_dmg = (int)Math.random()*200000;
-            int physical_hits_num = (int)Math.random()*2000;
-            int physical_miss_num = (int)Math.random()*1000; // misses are set at most half of hits
-            int spell_cast_num = (int)Math.random()*1500;
-            int spell_dmg = (int)Math.random()*200000;
-            int csCount = (int)Math.random()*400;            // should be related to game time, omitted for simplicity here.
+            int physical_dmg = (int)(Math.random()*200000);
+            int physical_hits_num = (int)(Math.random()*2000);
+            int physical_miss_num = (int)(Math.random()*1000); // misses are set at most half of hits
+            int spell_cast_num = (int)(Math.random()*1500);
+            int spell_dmg = (int)(Math.random()*200000);
+            int csCount = (int)(Math.random()*400);            // should be related to game time, omitted for simplicity here.
             
             /*KDAs*/
-            int kills = (int)Math.random()*blueKillsLeft; 
+            int kills = (i == this.getBlue_team().size()-1) ? blueKillsLeft : (int)(Math.random()*blueKillsLeft); 
             blueKillsLeft -= kills;
-            int deaths = (int)Math.random()*blueDeathsLeft;
+            int deaths = (i == this.getBlue_team().size()-1) ? blueKillsLeft : (int)(Math.random()*blueDeathsLeft);
             blueDeathsLeft -= deaths;
-            int towersTaken = (int)Math.random()*towersTakenBlue;
+            int towersTaken = (i == this.getBlue_team().size()-1) ? towersTakenBlue : (int)(Math.random()*towersTakenBlue);
             towersTakenBlue -= towersTaken;
-            int assists = (int)Math.random()*20;
+            int assists = (int)(Math.random()*20);
             
-            int first_hit_kills = (int)Math.random()*kills; //
+            int first_hit_kills = (int)(Math.random()*kills); //
             int time_played = this.getElapsedTime();
-            int exp_earned = (int)Math.random()*200;
-            int ip_earned = (int)Math.random()*100;
+            int exp_earned = (int)(Math.random()*200);
+            int ip_earned = (int)(Math.random()*100);
             if(blueWins){//if blue wins , get more exp and ip
                 exp_earned+=200;
                 ip_earned+=100;
@@ -104,26 +107,26 @@ public class Game {
             Player p = this.getPurple_team().get(i);
             
             /*dmg*/
-            int physical_dmg = (int)Math.random()*200000;
-            int physical_hits_num = (int)Math.random()*2000;
-            int physical_miss_num = (int)Math.random()*1000; // misses are set at most half of hits
-            int spell_cast_num = (int)Math.random()*1500;
-            int spell_dmg = (int)Math.random()*200000;
-            int csCount = (int)Math.random()*400;            // should be related to game time, omitted for simplicity here.
+            int physical_dmg = (int)(Math.random()*200000);
+            int physical_hits_num = (int)(Math.random()*2000);
+            int physical_miss_num = (int)(Math.random()*1000); // misses are set at most half of hits
+            int spell_cast_num = (int)(Math.random()*1500);
+            int spell_dmg = (int)(Math.random()*200000);
+            int csCount = (int)(Math.random()*400);            // should be related to game time, omitted for simplicity here.
             
             /*KDAs*/
-            int kills = (int)Math.random()*purpleKillsLeft; 
-            purpleDeathsLeft -= kills;
-            int deaths = (int)Math.random()*purpleDeathsLeft;
+            int kills = (i == this.getPurple_team().size()-1)? purpleKillsLeft : (int)(Math.random()*purpleKillsLeft); 
+            purpleKillsLeft -= kills;
+            int deaths = (i == this.getPurple_team().size()-1) ? purpleDeathsLeft : (int)(Math.random()*purpleDeathsLeft);
             purpleDeathsLeft -= deaths;
-            int towersTaken = (int)Math.random()*towersTakenPurple;
+            int towersTaken = (i == this.getPurple_team().size()-1) ? towersTakenPurple : (int)(Math.random()*towersTakenPurple);
             towersTakenPurple -= towersTaken;
-            int assists = (int)Math.random()*20;
+            int assists = (int)(Math.random()*20);
             
-            int first_hit_kills = (int)Math.random()*kills; //
+            int first_hit_kills = (int)(Math.random()*kills); //
             int time_played = this.getElapsedTime();
-            int exp_earned = (int)Math.random()*200;
-            int ip_earned = (int)Math.random()*100;
+            int exp_earned = (int)(Math.random()*200);
+            int ip_earned = (int)(Math.random()*100);
             if(!blueWins){//if blue lost, purple wins, get more ip and exp.
                 exp_earned+=200;
                 ip_earned+=100;

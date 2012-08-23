@@ -12,6 +12,12 @@ package player;
 public class PlayerInfo {
 //===============================constructor====================================
     public PlayerInfo(String firstName, String lastName, String email, String loginID, String password, String gameID){
+        this.setEmail(email);
+        this.setFirstName(firstName);
+        this.setGameID(gameID);
+        this.setLastName(lastName);
+        this.setLoginID(loginID);
+        this.setPassword(password);
     }
 //================================public========================================    
 //=================================private======================================
