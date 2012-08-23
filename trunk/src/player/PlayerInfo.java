@@ -5,7 +5,7 @@
 package player;
 
 /**
- *
+ * m2w: this class simulates the database saving user's info.
  * @author ruobo
  * @lastupdate 8/17/12 9:06 PM
  */
@@ -20,8 +20,8 @@ public class PlayerInfo {
     private String lastName;
     private String email;
     private String loginID;
-    private String password;
-    private String gameID;//once set, can't change.
+    private String password;    //pw should be encripted, omitted for simplicity.
+    private String gameID;      //once set, can't change.
     
 //===========================setters & getters==================================
     /**
