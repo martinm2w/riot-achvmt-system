@@ -31,18 +31,15 @@ public class Game {
     public void gameStart(){
         /*generate winner*/
         int winRand = (int)(Math.random()*10);
-        if(winRand >= 5) blueWins = true;
+        if(winRand >= 5) setBlueWins(true);
         
-        if(blueWins){//if blue team wins, given blue team 20 more kills
+        if(isBlueWins()){//if blue team wins, given blue team 20 more kills
             setTotalBlueKills((int)(Math.random()*50)+20);
             setTotalPurpleKills((int)(Math.random()*50));
         }else{//else give purple team 20 more kills.
             setTotalBlueKills((int)(Math.random()*50));
             setTotalPurpleKills((int)(Math.random()*50)+20);
         }
-        System.out.println(this.getTotalBlueKills());
-        System.out.println(this.getTotalPurpleKills());
-        System.out.println(this.blueWins);
 
         /* KDAs*/
         int blueKillsLeft = getTotalBlueKills();     //these 2 "left" vars are for assigning each players kills. substracting players kills from it each time.
@@ -92,7 +89,7 @@ public class Game {
             int time_played = this.getElapsedTime();
             int exp_earned = (int)(Math.random()*200);
             int ip_earned = (int)(Math.random()*100);
-            if(blueWins){//if blue wins , get more exp and ip
+            if(isBlueWins()){//if blue wins , get more exp and ip
                 exp_earned+=200;
                 ip_earned+=100;
             }
@@ -127,7 +124,7 @@ public class Game {
             int time_played = this.getElapsedTime();
             int exp_earned = (int)(Math.random()*200);
             int ip_earned = (int)(Math.random()*100);
-            if(!blueWins){//if blue lost, purple wins, get more ip and exp.
+            if(!isBlueWins()){//if blue lost, purple wins, get more ip and exp.
                 exp_earned+=200;
                 ip_earned+=100;
             }
@@ -228,5 +225,19 @@ public class Game {
      */
     public void setTotalPurpleKills(int totalPurpleKills) {
         this.totalPurpleKills = totalPurpleKills;
+    }
+
+    /**
+     * @return the blueWins
+     */
+    public boolean isBlueWins() {
+        return blueWins;
+    }
+
+    /**
+     * @param blueWins the blueWins to set
+     */
+    public void setBlueWins(boolean blueWins) {
+        this.blueWins = blueWins;
     }
 }
