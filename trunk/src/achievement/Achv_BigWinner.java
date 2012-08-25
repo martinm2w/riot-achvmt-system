@@ -19,12 +19,13 @@ public class Achv_BigWinner extends Achievement{
     }
 //================================public========================================    
     @Override
-    public void checkAchvCriteria(Player player) {
-        if(player ==null) return;
+    public boolean checkAchvCriteria(Player player) {
+        if(player ==null) return false;
         int totalWin = player.getHisStats().getTotal_wins();
         if(totalWin>=200){
-            super.setFulfilled(true);
+            return true;
         }
+        return false;
     }
 
     /**
@@ -37,6 +38,7 @@ public class Achv_BigWinner extends Achievement{
         if(player ==null) return;
         if(super.isFulfilled()){
             player.setInfluencePoints(player.getInfluencePoints()+100);
+            this.setNewAchv(true);
         }
     }
 //=================================private======================================

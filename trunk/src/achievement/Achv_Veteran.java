@@ -20,12 +20,13 @@ public class Achv_Veteran extends Achievement {
 //================================public========================================    
 //=================================private======================================
     @Override
-    public void checkAchvCriteria(Player player) {
-        if(player == null) return;
+    public boolean checkAchvCriteria(Player player) {
+        if(player == null) return false;
         int gamesPlayed = player.getHisStats().getGames_played();
         if(gamesPlayed >= 1000){
-            super.setFulfilled(true);
+            return true;
         }
+        return false;
     }
 
     /**
@@ -36,8 +37,9 @@ public class Achv_Veteran extends Achievement {
     @Override
     public void rewardIfFullfilled(Player player) {
         if(player == null) return;
-        if(super.isFulfilled()){
+        if(!this.isRewarded() && super.isFulfilled()){
             player.setInfluencePoints(player.getInfluencePoints()+200);
+            this.setRewarded(true);
         }
     }
 //==============================instance vars===================================

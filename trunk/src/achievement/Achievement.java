@@ -19,12 +19,14 @@ public abstract class Achievement {
         this.setFulfilled(false);
     }
 //================================public========================================    
-    public abstract void checkAchvCriteria(Player player);
+    public abstract boolean checkAchvCriteria(Player player);
     public abstract void rewardIfFullfilled(Player player);
 //=================================private======================================
 //==============================instance vars===================================
     private boolean fulfilled;
     private String achv_name;
+    private boolean newAchv = true;
+    private boolean rewarded = false;
 //============================setters & getters=================================
 
     /**
@@ -53,6 +55,34 @@ public abstract class Achievement {
      */
     public void setAchv_name(String achv_name) {
         this.achv_name = achv_name;
+    }
+
+    /**
+     * @return the newAchv
+     */
+    public boolean isNewAchv() {
+        return newAchv;
+    }
+
+    /**
+     * @param newAchv the newAchv to set
+     */
+    public void setNewAchv(boolean newAchv) {
+        this.newAchv = newAchv;
+    }
+
+    /**
+     * @return the rewarded
+     */
+    public boolean isRewarded() {
+        return rewarded;
+    }
+
+    /**
+     * @param rewarded the rewarded to set
+     */
+    public void setRewarded(boolean rewarded) {
+        this.rewarded = rewarded;
     }
 
 
