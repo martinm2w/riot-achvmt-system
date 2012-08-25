@@ -20,12 +20,13 @@ public class Achv_Bruiser extends Achievement {
 //================================public========================================    
 //=================================private======================================
     @Override
-    public void checkAchvCriteria(Player player) {
-        if(player ==null) return;
+    public boolean checkAchvCriteria(Player player) {
+        if(player ==null) return false;
         int currGameDmg = player.getCurrStats().getphysical_dmg();
         if(currGameDmg >= 500){
-            super.setFulfilled(true);
+            return true;
         }
+        return false;
     }
 
     /**
@@ -36,8 +37,9 @@ public class Achv_Bruiser extends Achievement {
     @Override
     public void rewardIfFullfilled(Player player) {
         if(player ==null) return;
-        if(super.isFulfilled()){
+        if(!this.isRewarded() && super.isFulfilled()){
             player.setInfluencePoints(player.getInfluencePoints()+300);
+            this.setRewarded(true);
         }
     }
 //==============================instance vars===================================

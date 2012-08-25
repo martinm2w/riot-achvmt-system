@@ -18,7 +18,7 @@ import heroes.*;
  */
 public class Game {
 //===============================constructor====================================
-    public Game(ArrayList<Player> purple_team, ArrayList<Player> blue_team){
+    public Game(ArrayList<Player> blue_team, ArrayList<Player> purple_team){
         this.setBlue_team(blue_team);
         this.setPurple_team(purple_team);
         
@@ -93,7 +93,6 @@ public class Game {
                 exp_earned+=200;
                 ip_earned+=100;
             }
-//            System.out.println(p.getCurrStats());
             PlayerCurrGameStats curStats = new PlayerCurrGameStats(physical_dmg, physical_hits_num, physical_miss_num, spell_cast_num, spell_dmg, kills, deaths, assists, first_hit_kills, time_played, exp_earned, ip_earned, Heros.heroesList.get(i), csCount, towersTaken);
             p.setCurrStats(curStats);
         }

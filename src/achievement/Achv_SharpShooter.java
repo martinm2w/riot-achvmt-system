@@ -19,15 +19,15 @@ public class Achv_SharpShooter extends Achievement {
     }
 
     @Override
-    public void checkAchvCriteria(Player player) {
-        if(player ==null) return;
+    public boolean checkAchvCriteria(Player player) {
+        if(player ==null) return false;
         int totalHit = player.getCurrStats().getPhysical_hits_num();
         int totalMiss = player.getCurrStats().getPhysical_miss_num();
         double accuracy = (double)totalHit / (double)(totalHit+totalMiss);
         if(accuracy >= 0.75){
-            super.setFulfilled(true);
+            return true;
         }
-        
+        return false;
     }
 
     /**
@@ -38,8 +38,9 @@ public class Achv_SharpShooter extends Achievement {
     @Override
     public void rewardIfFullfilled(Player player) {
         if(player ==null) return;
-        if(super.isFulfilled()){
+        if(!this.isRewarded() && super.isFulfilled()){
             player.setInfluencePoints(player.getInfluencePoints() + 50);
+            this.setRewarded(true);
         }
     }
 //===============================constructor====================================

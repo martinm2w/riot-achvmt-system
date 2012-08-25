@@ -8,14 +8,14 @@ package achievement;
 import java.util.*;
 import player.*;
 /**
- *
+ * m2w: each player has a AchievementsHandler which has a map of achievements.
  * @author ruobo
  * @lastupdate Aug 19, 2012 
  */
-public class Achievements_handler {
+public class AchievementsHandler {
 //===============================constructor====================================
-    public Achievements_handler(){
-        Achv_BigWinner bigWinner = new Achv_BigWinner();
+    public AchievementsHandler(){
+        Achievement bigWinner = new Achv_BigWinner();
         Achv_Bruiser bruiser = new Achv_Bruiser();
         Achv_SharpShooter sharpShooter= new Achv_SharpShooter();
         Achv_Veteran veteran = new Achv_Veteran();
@@ -25,10 +25,20 @@ public class Achievements_handler {
         this.allAchvmnts.put(veteran.getAchv_name(), veteran);
     }
 //================================public========================================    
-    public void updateAchvmntsStats(Player player){
+    public void checkAndRewardAchvAfterGame(Player player){
+        this.updateAchvmntsStats(player);
+        this.rewardFulfilledAchvmnts(player);
+    }
+//=================================private======================================
+    /**
+     * m2w: this method checks the player's achievements. and will set to fulfilled if the criteria was met.
+     * @param player 
+     */
+    private void updateAchvmntsStats(Player player){
         for(String achvName : allAchvmnts.keySet()){
             Achievement tmpAchv = allAchvmnts.get(achvName);
-            tmpAchv.checkAchvCriteria(player);
+            boolean fulfilled = tmpAchv.checkAchvCriteria(player);
+            if(fulfilled) tmpAchv.setFulfilled(true);
         }
     }
     
@@ -36,7 +46,7 @@ public class Achievements_handler {
      * m2w: check achvmnts if any of them fulfilled  and reward if did.
      * @lastupdate 8/19/12 1:00 PM
      */
-    public void checkFulfilledAchvmnts(Player player){
+    private void rewardFulfilledAchvmnts(Player player){
         for(String achvName : allAchvmnts.keySet()){
             Achievement tmpAchv = allAchvmnts.get(achvName);
             if(tmpAchv.isFulfilled()){
@@ -44,7 +54,6 @@ public class Achievements_handler {
             }
         }
     }
-//=================================private======================================
 //==============================instance vars===================================
     private HashMap<String, Achievement> allAchvmnts = new HashMap<String, Achievement>();
 //============================setters & getters=================================
@@ -63,3 +72,6 @@ public class Achievements_handler {
         this.allAchvmnts = allAchvmnts;
     }
 }
+
+//For the sake of later expand-ability on achievements and the achievements criteria might 
+//get more complicated, I decided to create them as actual classes.

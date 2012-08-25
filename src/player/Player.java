@@ -19,20 +19,17 @@ public class Player {
     public Player(PlayerInfo info){
         this.setInfo(info);
         hisStats = new PlayerHistoryStats();
-        Achv_handler = new Achievements_handler();
+        Achv_handler = new AchievementsHandler();
     }
 //================================public========================================
     
 //=================================private======================================
-    private void checkAchvAfterGame(){
-        this.getAchv_handler().updateAchvmntsStats(this);
-        this.getAchv_handler().checkFulfilledAchvmnts(this);
-    }
+
 //==============================instance vars===================================
     private PlayerInfo info;
     private PlayerHistoryStats hisStats;
     private PlayerCurrGameStats currStats; 
-    private Achievements_handler Achv_handler;
+    private AchievementsHandler Achv_handler;
     
     private int level = 1;
     private int curr_level_exp = 0;
@@ -189,14 +186,14 @@ public class Player {
     /**
      * @return the Achv_handler
      */
-    public Achievements_handler getAchv_handler() {
+    public AchievementsHandler getAchvHandler() {
         return Achv_handler;
     }
 
     /**
      * @param Achv_handler the Achv_handler to set
      */
-    public void setAchv_handler(Achievements_handler Achv_handler) {
+    public void setAchv_handler(AchievementsHandler Achv_handler) {
         this.Achv_handler = Achv_handler;
     }
 

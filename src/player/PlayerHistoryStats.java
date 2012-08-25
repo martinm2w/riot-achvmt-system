@@ -19,6 +19,9 @@ public class PlayerHistoryStats {
         
     }
 //================================public========================================        
+    public void updatePlayerHistoryStats(PlayerCurrGameStats currStats){
+        games_played += 1;
+    }
 //=================================private======================================
 //==============================instance vars===================================
     //for simplisity all instance vars are initialized by value;
