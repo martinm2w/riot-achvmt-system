@@ -21,6 +21,44 @@ public class PlayerHistoryStats {
 //================================public========================================        
     public void updatePlayerHistoryStats(PlayerCurrGameStats currStats){
         games_played += 1;
+        total_time_played += currStats.getTime_played();
+        total_kills += currStats.getKills();
+        total_deaths += currStats.getDeaths();
+        total_assists += currStats.getAssists();
+        max_kills = (currStats.getKills() > max_kills) ? currStats.getKills() : max_kills;
+        int currMaxDeath = (int)(Math.random()*(currStats.getDeaths()));
+        max_deaths = (currMaxDeath > max_deaths) ? currMaxDeath : max_deaths;
+        int currMaxDoubleKill = currStats.getKills()/2;
+        double_kills = (int)(Math.random()*currMaxDoubleKill);
+        int currMaxTrippleKill = currStats.getKills()/3;
+        tripple_kills = (int)(Math.random()*currMaxTrippleKill);
+        int currMaxQuadraKill = currStats.getKills()/4;
+        quadra_kills = (int)(Math.random()*currMaxQuadraKill);
+        int currMaxPentaKill = currStats.getKills()/5;
+        penta_kills = (int)(Math.random()*currMaxPentaKill);
+        total_towers_takedowns += currStats.getTowersTaken();
+        if(currStats.hasWon()) {
+            total_wins += 1;
+        }else{
+            total_losses += 1;
+        }
+        total_cs += currStats.getCsCount();
+        total_physical_dmg += currStats.getphysical_dmg();
+        total_spell_dmg += currStats.getspell_dmg();
+        int currAveDmg = (int)(currStats.getphysical_dmg() / currStats.getPhysical_hits_num());
+        largest_crit_dmg =  ( (currAveDmg*3) > largest_crit_dmg ) ? currAveDmg*3 : largest_crit_dmg;
+        total_gold_earned += currStats.getCsCount()*25;
+        healing_done += (int)(Math.random()*1000);
+        int currMaxKillSpree = (int)(Math.random()*(currStats.getKills()));
+        highest_killing_spree = (currMaxKillSpree> highest_killing_spree) ? currMaxKillSpree : highest_killing_spree;
+        Integer currTimes = heros_used_times.get(currStats.getHero_used().getHeroName());
+        if(currTimes == null){
+            heros_used_times.put(currStats.getHero_used().getHeroName(), 1);
+        }else{
+            heros_used_times.put(currStats.getHero_used().getHeroName(), currTimes++);
+        }
+        
+        
     }
 //=================================private======================================
 //==============================instance vars===================================
@@ -41,17 +79,16 @@ public class PlayerHistoryStats {
     private int total_towers_takedowns = 0;
     private int total_wins=0;
     private int total_losses=0;
-    private int total_monster_kills=0;
-    private int total_minion_kills=0;
+    private int total_cs=0;
     
     private int total_physical_dmg=0;
-    private int total_magic_dmg=0;
+    private int total_spell_dmg=0;
     private int largest_crit_dmg=0;
     private int total_gold_earned=0;
     private int healing_done=0;
     
     private int highest_killing_spree=0;
-    private HashMap<String, Integer> heros_used_times = new  HashMap<String, Integer>();//omitted hero kda in the actual ranked stats tab.
+    private HashMap<String, Integer> heros_used_times = new HashMap<String, Integer>();//omitted hero kda in the actual ranked stats tab.
 //============================setters & getters=================================
 
     /**
@@ -254,28 +291,14 @@ public class PlayerHistoryStats {
      * @return the total_monster_kills
      */
     public int getTotal_monster_kills() {
-        return total_monster_kills;
+        return total_cs;
     }
 
     /**
      * @param total_monster_kills the total_monster_kills to add
      */
     public void addTotal_monster_kills(int total_monster_kills) {
-        this.total_monster_kills = total_monster_kills;
-    }
-
-    /**
-     * @return the total_minion_kills
-     */
-    public int getTotal_minion_kills() {
-        return total_minion_kills;
-    }
-
-    /**
-     * @param total_minion_kills the total_minion_kills to add
-     */
-    public void addTotal_minion_kills(int total_minion_kills) {
-        this.total_minion_kills = total_minion_kills;
+        this.total_cs = total_monster_kills;
     }
 
     /**
@@ -296,14 +319,14 @@ public class PlayerHistoryStats {
      * @return the total_magic_dmg
      */
     public int getTotal_magic_dmg() {
-        return total_magic_dmg;
+        return total_spell_dmg;
     }
 
     /**
      * @param total_magic_dmg the total_magic_dmg to add
      */
     public void addTotal_magic_dmg(int total_magic_dmg) {
-        this.total_magic_dmg = total_magic_dmg;
+        this.total_spell_dmg = total_magic_dmg;
     }
 
     /**

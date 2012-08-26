@@ -63,6 +63,54 @@ public class Game {
         this.setHasEnded(true);
 
     }
+    
+    
+    public void printGameSummary(Game game){
+        if(game.isBlueWins()){
+            System.out.println("blue team won");
+        }else{
+            System.out.println("purple team won");
+        }
+        System.out.println("blue total kills: " + game.getTotalBlueKills());
+        System.out.println("purple total kills: " + game.getTotalPurpleKills());
+        System.out.println("========================================================================================");
+        System.out.println("ID      K\\D\\A           Items          CS count       towers \t");
+        for(int i = 0; i < 5; i++){
+            Player blueP = game.getBlue_team().get(i);
+            //info
+            String bluePgameID = blueP.getInfo().getGameID();
+            
+            String killString = Integer.toString(blueP.getCurrStats().getKills());
+            String deathString = Integer.toString(blueP.getCurrStats().getDeaths());
+            String assistString = Integer.toString(blueP.getCurrStats().getAssists());
+            String kdaString = killString + "\\" + deathString + "\\" + assistString;
+            
+            String CsString = Integer.toString(blueP.getCurrStats().getCsCount());
+            String towersTaken = Integer.toString(blueP.getCurrStats().getTowersTaken());
+                    
+            //stats
+            System.out.print(bluePgameID + "    \t" + kdaString + "    \t" + "items" + "    \t" + CsString + "        \t" + towersTaken + "    \t\n");
+        }
+        System.out.println("-------------------------------------------------------------------------------------------");
+        for(int i = 0; i < 5; i++){
+            Player PurpleP = game.getPurple_team().get(i);
+            //info
+            String PurplePgameID = PurpleP.getInfo().getGameID();
+            
+            String killString = Integer.toString(PurpleP.getCurrStats().getKills());
+            String deathString = Integer.toString(PurpleP.getCurrStats().getDeaths());
+            String assistString = Integer.toString(PurpleP.getCurrStats().getAssists());
+            String kdaString = killString + "\\" + deathString + "\\" + assistString;
+            
+            String CsString = Integer.toString(PurpleP.getCurrStats().getCsCount());
+            String towersTaken = Integer.toString(PurpleP.getCurrStats().getTowersTaken());
+                    
+            //stats
+            System.out.print(PurplePgameID + "    \t" + kdaString + "    \t" + "items" + "    \t" + CsString + "        \t" + towersTaken + "    \t\n");
+        }
+        System.out.println("========================================================================================");
+        System.out.println();
+    }
 //=================================private======================================
     private void setBlueCurrStats(int blueKillsLeft, int blueDeathsLeft, int towersTakenBlue){
         for(int i = 0; i < this.getBlue_team().size(); i ++){
@@ -87,13 +135,16 @@ public class Game {
             
             int first_hit_kills = (int)(Math.random()*kills); //
             int time_played = this.getElapsedTime();
-            int exp_earned = (int)(Math.random()*200);
+            int exp_earned = (int)(Math.random()*100);
             int ip_earned = (int)(Math.random()*100);
+            
+            boolean won = false;
             if(isBlueWins()){//if blue wins , get more exp and ip
-                exp_earned+=200;
+                exp_earned+=100;
                 ip_earned+=100;
+                won = true;
             }
-            PlayerCurrGameStats curStats = new PlayerCurrGameStats(physical_dmg, physical_hits_num, physical_miss_num, spell_cast_num, spell_dmg, kills, deaths, assists, first_hit_kills, time_played, exp_earned, ip_earned, Heros.heroesList.get(i), csCount, towersTaken);
+            PlayerCurrGameStats curStats = new PlayerCurrGameStats(physical_dmg, physical_hits_num, physical_miss_num, spell_cast_num, spell_dmg, kills, deaths, assists, first_hit_kills, time_played, exp_earned, ip_earned, Heros.heroesList.get(i), csCount, towersTaken, won);
             p.setCurrStats(curStats);
         }
     }
@@ -121,14 +172,16 @@ public class Game {
             
             int first_hit_kills = (int)(Math.random()*kills); //
             int time_played = this.getElapsedTime();
-            int exp_earned = (int)(Math.random()*200);
+            int exp_earned = (int)(Math.random()*100);
             int ip_earned = (int)(Math.random()*100);
+            boolean won = false;
             if(!isBlueWins()){//if blue lost, purple wins, get more ip and exp.
-                exp_earned+=200;
+                exp_earned+=100;
                 ip_earned+=100;
+                won = true;
             }
             
-            PlayerCurrGameStats curStats = new PlayerCurrGameStats(physical_dmg, physical_hits_num, physical_miss_num, spell_cast_num, spell_dmg, kills, deaths, assists, first_hit_kills, time_played, exp_earned, ip_earned, Heros.heroesList.get(i), csCount, towersTaken);
+            PlayerCurrGameStats curStats = new PlayerCurrGameStats(physical_dmg, physical_hits_num, physical_miss_num, spell_cast_num, spell_dmg, kills, deaths, assists, first_hit_kills, time_played, exp_earned, ip_earned, Heros.heroesList.get(i), csCount, towersTaken, won);
             p.setCurrStats(curStats);
         }
     }
