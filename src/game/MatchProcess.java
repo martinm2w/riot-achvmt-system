@@ -40,7 +40,7 @@ public class MatchProcess {
                     if(Character.isDigit(command.charAt(0))){
                         mp.runGameCommand(command);
                     }else if(command.startsWith("stats")){
-                        
+                        mp.printOutPlayerInfoAndStats(command);
                     }else if(command.startsWith("clearStats")){
                         
                     }else if(command.equalsIgnoreCase("end")){
@@ -62,11 +62,24 @@ public class MatchProcess {
     }
 //=================================private======================================
     /*1. print out player stats command*/
-    /*1. clear players history stats command*/
+    private void printOutPlayerInfoAndStats(String command){
+        Player p = null;
+        String playerGameID = command.split("[()]")[1];
+        Character.toString(playerGameID.charAt(1));
+        int index = Integer.parseInt(Character.toString(playerGameID.charAt(1)));
+        if(playerGameID.charAt(0) == 'p' || playerGameID.charAt(0) == 'P'){
+            p = purple_team.get(index);
+        }else if(playerGameID.charAt(0) == 'b' || playerGameID.charAt(0) == 'B'){
+            p = blue_team.get(index);
+        }
+        p.printPlayerInfoAndStats();
+        
+        System.out.println();
+        System.out.println();
+    }
+    /*2. clear players history stats command*/
     /*3. run game command and its sub-level methods*/
     private void runGameCommand(String command){
-        ArrayList<Player> blue_team = this.createBlueTeam();
-        ArrayList<Player> purple_team = this.createPurpleTeam();
         int gameCountint = Integer.parseInt(command);
         for(int i = 0; i < gameCountint; i++){
             System.out.println("+++Game " + (i+1) + " +++");
@@ -74,18 +87,19 @@ public class MatchProcess {
             //major calculation and printouts.
             /*1. generate one match result*/
             Game currGame = this.oneMatch(); //will not return null if has ended.
-            /*2. update */
-            if(currGame!=null){
-                this.updatePlayerAchvStats(currGame);
+            /*2. update player history and achievement stats*/
+            if(currGame!=null){//if game ended
+                this.updatePlayerHistStats();
+                this.updatePlayerAchvStats();
             }else{
                 System.out.println("The current game hasn't end yet.");
             }
             
             /*3. prints game summary*/
-            this.printGameSummary(currGame);
+            currGame.printGameSummary(currGame);
             
         }
-        /*4. prints newly earned achievements*/
+        /*5. prints newly earned achievements*/
         this.printNewAchievements();
         System.out.println();
         System.out.println();
@@ -106,14 +120,25 @@ public class MatchProcess {
      * @param game : the game just finished.
      * @lastupdate 8/24/12 8:42 PM 
      */
-    private void updatePlayerAchvStats(Game game){
+    private void updatePlayerAchvStats(){
         //check blue team
-        for(Player p : game.getBlue_team()){
+        for(Player p : blue_team){
             p.getAchvHandler().checkAndRewardAchvAfterGame(p);
         }
         //check purple team
-        for(Player p : game.getPurple_team()){
+        for(Player p : purple_team){
             p.getAchvHandler().checkAndRewardAchvAfterGame(p);
+        }
+    } 
+    
+    private void updatePlayerHistStats(){
+        //check blue team
+        for(Player p : blue_team){
+            p.getHisStats().updatePlayerHistoryStats(p.getCurrStats());
+        }
+        //check purple team
+        for(Player p : purple_team){
+            p.getHisStats().updatePlayerHistoryStats(p.getCurrStats());
         }
     }
     
@@ -145,53 +170,6 @@ public class MatchProcess {
             purple_team.add(player);
         }
         return purple_team;
-    }
-    
-    private void printGameSummary(Game game){
-        if(game.isBlueWins()){
-            System.out.println("blue team won");
-        }else{
-            System.out.println("purple team won");
-        }
-        System.out.println("blue total kills: " + game.getTotalBlueKills());
-        System.out.println("purple total kills: " + game.getTotalPurpleKills());
-        System.out.println("========================================================================================");
-        System.out.println("ID      K\\D\\A           Items          CS count       towers \t");
-        for(int i = 0; i < 5; i++){
-            Player blueP = game.getBlue_team().get(i);
-            //info
-            String bluePgameID = blueP.getInfo().getGameID();
-            
-            String killString = Integer.toString(blueP.getCurrStats().getKills());
-            String deathString = Integer.toString(blueP.getCurrStats().getDeaths());
-            String assistString = Integer.toString(blueP.getCurrStats().getAssists());
-            String kdaString = killString + "\\" + deathString + "\\" + assistString;
-            
-            String CsString = Integer.toString(blueP.getCurrStats().getCsCount());
-            String towersTaken = Integer.toString(blueP.getCurrStats().getTowersTaken());
-                    
-            //stats
-            System.out.print(bluePgameID + "    \t" + kdaString + "    \t" + "items" + "    \t" + CsString + "        \t" + towersTaken + "    \t\n");
-        }
-        System.out.println("-------------------------------------------------------------------------------------------");
-        for(int i = 0; i < 5; i++){
-            Player PurpleP = game.getPurple_team().get(i);
-            //info
-            String PurplePgameID = PurpleP.getInfo().getGameID();
-            
-            String killString = Integer.toString(PurpleP.getCurrStats().getKills());
-            String deathString = Integer.toString(PurpleP.getCurrStats().getDeaths());
-            String assistString = Integer.toString(PurpleP.getCurrStats().getAssists());
-            String kdaString = killString + "\\" + deathString + "\\" + assistString;
-            
-            String CsString = Integer.toString(PurpleP.getCurrStats().getCsCount());
-            String towersTaken = Integer.toString(PurpleP.getCurrStats().getTowersTaken());
-                    
-            //stats
-            System.out.print(PurplePgameID + "    \t" + kdaString + "    \t" + "items" + "    \t" + CsString + "        \t" + towersTaken + "    \t\n");
-        }
-        System.out.println("========================================================================================");
-        System.out.println();
     }
     
     private void printNewAchievements(){

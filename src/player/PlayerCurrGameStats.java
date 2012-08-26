@@ -33,7 +33,7 @@ public class PlayerCurrGameStats {
      * @param towersTaken 
      * @lastupdate 8/22/12 11:18 PM
      */
-    public PlayerCurrGameStats(int physical_dmg, int physical_hits_num, int physical_miss_num, int spell_cast_num, int spell_dmg, int kills, int deaths, int assists, int first_hit_kills, int time_played, int exp_earned, int ip_earned, Hero hero_used, int csCount, int towersTaken){
+    public PlayerCurrGameStats(int physical_dmg, int physical_hits_num, int physical_miss_num, int spell_cast_num, int spell_dmg, int kills, int deaths, int assists, int first_hit_kills, int time_played, int exp_earned, int ip_earned, Hero hero_used, int csCount, int towersTaken, boolean won){
         this.setAssists(assists);
         this.setFirst_hit_kills(first_hit_kills);
         this.setKills(kills);
@@ -49,6 +49,7 @@ public class PlayerCurrGameStats {
         this.setIp_earned(ip_earned);
         this.setCsCount(csCount);
         this.setTowersTaken(towersTaken);
+        this.setWon(won);
     }
 //================================public========================================    
 //=================================private======================================
@@ -72,7 +73,7 @@ public class PlayerCurrGameStats {
      * @param towersTaken
      * @lastupdate 8/22/12 11:18 PM
      */
-    public void updatePlayerCurrGameStats(int physical_dmg, int physical_hits_num, int physical_miss_num, int spell_cast_num, int spell_dmg, int kills, int deaths, int assists, int first_hit_kills, int time_played, int exp_earned, int ip_earned, Hero hero_used, int csCount, int towersTaken){
+    public void updatePlayerCurrGameStats(int physical_dmg, int physical_hits_num, int physical_miss_num, int spell_cast_num, int spell_dmg, int kills, int deaths, int assists, int first_hit_kills, int time_played, int exp_earned, int ip_earned, Hero hero_used, int csCount, int towersTaken, boolean won){
         this.setAssists(assists);
         this.setFirst_hit_kills(first_hit_kills);
         this.setKills(kills);
@@ -88,7 +89,7 @@ public class PlayerCurrGameStats {
         this.setIp_earned(ip_earned);
         this.setCsCount(csCount);
         this.setTowersTaken(towersTaken);
-        
+        this.setWon(won);
     }
     
 //==============================instance vars===================================
@@ -109,6 +110,8 @@ public class PlayerCurrGameStats {
     private int time_played;
     private int exp_earned;
     private int ip_earned;
+    
+    private boolean won = false;
     
 //============================setters & getters=================================
 
@@ -320,5 +323,19 @@ public class PlayerCurrGameStats {
      */
     public void setTowersTaken(int towersTaken) {
         this.towersTaken = towersTaken;
+    }
+
+    /**
+     * @return the won
+     */
+    public boolean hasWon() {
+        return won;
+    }
+
+    /**
+     * @param won the won to set
+     */
+    public void setWon(boolean won) {
+        this.won = won;
     }
 }

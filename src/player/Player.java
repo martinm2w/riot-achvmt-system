@@ -22,7 +22,11 @@ public class Player {
         Achv_handler = new AchievementsHandler();
     }
 //================================public========================================
-    
+    public void printPlayerInfoAndStats(){
+        System.out.println("========================================================================================");
+        System.out.println("Player game ID: " + this.getInfo().getGameID() + ", at level (" + );
+        System.out.println("");
+    }
 //=================================private======================================
 
 //==============================instance vars===================================
@@ -33,8 +37,8 @@ public class Player {
     
     private int level = 1;
     private int curr_level_exp = 0;
-    private int next_level_exp = 280;
-    private int cummulative_exp = 0;
+    //need to change this
+    private int next_level_exp = 480;
     private int riotPoints;
     private int influencePoints;
     
