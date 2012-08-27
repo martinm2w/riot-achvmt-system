@@ -29,9 +29,9 @@ public class MatchProcess {
             //use hashmaps of sirialized player objs to simulate hibernate
             try {
                 while(endProcess != true){
-                    System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                    System.out.println("+++++++++++++++++++++++++++ LOL Simulation System ++++++++++++++++++++++++++");
                     System.out.println("1. If you wish to see certain player's stats, please enter \"stats(gameID)\" , e.g: stats(b1), note: \"b1~b5\", or \"p1~p5\" as blue or purple team player 1 to 5");
-                    System.out.println("2. If you wish to clear the saved history stats, please enter clearStats(gameID)");
+                    System.out.println("2. If you wish to clear the saved history stats, please enter \"clearstats(gameID)\", or \"clearstats3(all)\" to clear all players' history stats records");
                     System.out.println("3. If you wish to play a few games, please enter how many games want to play(an int)");
                     System.out.println("4. If you wish to quit this program, please enter \"end\"");
                     System.out.println("please enter the command: ");
@@ -39,45 +39,85 @@ public class MatchProcess {
                     //
                     if(Character.isDigit(command.charAt(0))){
                         mp.runGameCommand(command);
-                    }else if(command.startsWith("stats")){
+                    }else if(command.startsWith("stats(") && command.endsWith(")")){
                         mp.printOutPlayerInfoAndStats(command);
-                    }else if(command.startsWith("clearStats")){
-                        
+                    }else if(command.startsWith("clearstats")){
+                        mp.clearPlayerHistStats(command);
                     }else if(command.equalsIgnoreCase("end")){
                         endProcess = true;
                     }else{
-                        System.out.println("Not a valid command, please pick one from the 3 kinds of commands");
+                        System.out.println("###1Not a valid command, please pick one from the 3 kinds of commands###");
+                        System.out.println();
                     }
                 }
-               System.out.println("Please enter which player(ID)'s stats you wish to examine: ");
-               String playerGameID = bufRead.readLine();
-               //get which player, and prints its stats
-          }
-          catch (IOException err) {
-               System.out.println("Error reading line");
-          }
-          catch(NumberFormatException err) {
-               System.out.println("Error Converting Number");
+          }catch (IOException err) {
+               System.out.println("###Error reading line###");
+               System.out.println();
+          }catch(NumberFormatException err) {
+               System.out.println("###Error Converting Number###");
+               System.out.println();
+          }catch(Exception e){
+              e.printStackTrace();
+              System.out.println("###2Not a valid command, please pick one from the 3 kinds of commands###");
+              System.out.println();
           }
     }
 //=================================private======================================
     /*1. print out player stats command*/
     private void printOutPlayerInfoAndStats(String command){
-        Player p = null;
-        String playerGameID = command.split("[()]")[1];
-        Character.toString(playerGameID.charAt(1));
-        int index = Integer.parseInt(Character.toString(playerGameID.charAt(1)));
-        if(playerGameID.charAt(0) == 'p' || playerGameID.charAt(0) == 'P'){
-            p = purple_team.get(index);
-        }else if(playerGameID.charAt(0) == 'b' || playerGameID.charAt(0) == 'B'){
-            p = blue_team.get(index);
+        try{
+            Player p = null;
+            String playerGameID = command.split("[()]")[1];
+            Character.toString(playerGameID.charAt(1));
+            int index = Integer.parseInt(Character.toString(playerGameID.charAt(1))) - 1;
+            if(playerGameID.charAt(0) == 'p' || playerGameID.charAt(0) == 'P'){
+                p = purple_team.get(index);
+            }else if(playerGameID.charAt(0) == 'b' || playerGameID.charAt(0) == 'B'){
+                p = blue_team.get(index);
+            }
+            p.printPlayerInfoAndStats();
+
+            System.out.println();
+            System.out.println();
+        }catch(Exception e){
+            System.out.println("###Not a valid stats command, correct format example: \"stats(b1)\"###");
+            System.out.println();
         }
-        p.printPlayerInfoAndStats();
-        
-        System.out.println();
-        System.out.println();
     }
     /*2. clear players history stats command*/
+    private void clearPlayerHistStats(String command){
+        try{
+            String playerGameID = command.split("[()]")[1];
+            if(playerGameID.equalsIgnoreCase("all")){
+                //check blue team
+                for(Player p : blue_team){
+                    p.getHisStats().clear();
+                }
+                //check purple team
+                for(Player p : purple_team){
+                    p.getHisStats().clear();
+                }
+                System.out.println("###All players' history stats have been cleared.###");
+                System.out.println();
+            }else{
+                Player p = null;
+                Character.toString(playerGameID.charAt(1));
+                int index = Integer.parseInt(Character.toString(playerGameID.charAt(1))) - 1;
+                if(playerGameID.charAt(0) == 'p' || playerGameID.charAt(0) == 'P'){
+                    p = purple_team.get(index);
+                }else if(playerGameID.charAt(0) == 'b' || playerGameID.charAt(0) == 'B'){
+                    p = blue_team.get(index);
+                }
+                p.getHisStats().clear();
+                System.out.println("###Player["+p.getInfo().getGameID()+"]'s history stats has been cleared.###");
+                System.out.println();
+            }
+            System.out.println();
+        }catch(Exception e){
+            System.out.println("###Not a valid clearstats command, correct format example: \"clearstats(b1)\"###");
+            System.out.println();
+        }
+    }
     /*3. run game command and its sub-level methods*/
     private void runGameCommand(String command){
         int gameCountint = Integer.parseInt(command);
@@ -85,12 +125,15 @@ public class MatchProcess {
             System.out.println("+++Game " + (i+1) + " +++");
 
             //major calculation and printouts.
+            
             /*1. generate one match result*/
             Game currGame = this.oneMatch(); //will not return null if has ended.
+            
             /*2. update player history and achievement stats*/
             if(currGame!=null){//if game ended
                 this.updatePlayerHistStats();
                 this.updatePlayerAchvStats();
+                this.updatePlayerIpandExp();
             }else{
                 System.out.println("The current game hasn't end yet.");
             }
@@ -98,9 +141,10 @@ public class MatchProcess {
             /*3. prints game summary*/
             currGame.printGameSummary(currGame);
             
+            /*4. prints newly earned achievements*/
+            this.printNewAchievements();
         }
-        /*5. prints newly earned achievements*/
-        this.printNewAchievements();
+        
         System.out.println();
         System.out.println();
     }
@@ -142,6 +186,17 @@ public class MatchProcess {
         }
     }
     
+    private void updatePlayerIpandExp(){
+        //check blue team
+        for(Player p : blue_team){
+            p.updatePlayerIPandExp();
+        }
+        //check purple team
+        for(Player p : purple_team){
+            p.updatePlayerIPandExp();
+        }
+    }
+    
     /**
      * m2w : this is just making the class tidy. wrapper method of creating blue
      * @return the list of blue team players
@@ -179,7 +234,7 @@ public class MatchProcess {
             AchievementsHandler ah = p.getAchvHandler();
             for(Achievement achv : ah.getAllAchvmnts().values()){
                 if(achv.isFulfilled() && achv.isNewAchv()){
-                    System.out.println("Player " + p.getInfo().getGameID() + " has earn a new achievement: " + achv.getAchv_name() + ". Congratulations!!!");
+                    System.out.println("Congratulations!!!"+" Player [" + p.getInfo().getGameID() + "] has benn awarded [" + achv.getRewardIP() + "] IP for the new achievement: [" + achv.getAchv_name() + "]");
                     achv.setNewAchv(false);//is an old achv after announced.
                 }
             }
@@ -189,8 +244,9 @@ public class MatchProcess {
         for(Player p : getPurple_team()){
             AchievementsHandler ah = p.getAchvHandler();
             for(Achievement achv : ah.getAllAchvmnts().values()){
-                if(achv.isFulfilled() && achv.isNewAchv()){
-                    System.out.println("Player " + p.getInfo().getGameID() + "has earn a new achievement: " + achv.getAchv_name() + ". Congratulations!!!");
+                if(achv.isFulfilled() && achv.isNewAchv()){ 
+                    System.out.println("Congratulations!!!"+" Player [" + p.getInfo().getGameID() + "] has benn awarded [" + achv.getRewardIP() + "] IP for the new achievement: [" + achv.getAchv_name() + "]");
+                    achv.setNewAchv(false);//is an old achv after announced.
                 }
             }
         }

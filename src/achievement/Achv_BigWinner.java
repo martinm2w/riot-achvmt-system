@@ -15,7 +15,7 @@ import player.*;
 public class Achv_BigWinner extends Achievement{
 //===============================constructor====================================
     public Achv_BigWinner(){
-        super("Big Winner");
+        super("Big Winner", 300);
     }
 //================================public========================================    
     @Override
@@ -26,20 +26,6 @@ public class Achv_BigWinner extends Achievement{
             return true;
         }
         return false;
-    }
-
-    /**
-     * 
-     * @param player 
-     * @lastupdate 8/20/12 3:37 PM
-     */
-    @Override
-    public void rewardIfFullfilled(Player player) {
-        if(player ==null) return;
-        if(super.isFulfilled()){
-            player.setInfluencePoints(player.getInfluencePoints()+100);
-            this.setNewAchv(true);
-        }
     }
 //=================================private======================================
 //==============================instance vars===================================

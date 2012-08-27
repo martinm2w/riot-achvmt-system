@@ -15,10 +15,9 @@ import player.*;
 public class Achv_Bruiser extends Achievement {
 //===============================constructor====================================
     public Achv_Bruiser(){
-        super("Bruiser");
+        super("Bruiser", 50);
     }
 //================================public========================================    
-//=================================private======================================
     @Override
     public boolean checkAchvCriteria(Player player) {
         if(player ==null) return false;
@@ -28,20 +27,7 @@ public class Achv_Bruiser extends Achievement {
         }
         return false;
     }
-
-    /**
-     * m2w: 
-     * @param player 
-     * @lastupdate 8/20/12 3:38 PM
-     */
-    @Override
-    public void rewardIfFullfilled(Player player) {
-        if(player ==null) return;
-        if(!this.isRewarded() && super.isFulfilled()){
-            player.setInfluencePoints(player.getInfluencePoints()+300);
-            this.setRewarded(true);
-        }
-    }
+//=================================private======================================
 //==============================instance vars===================================
 //============================setters & getters=================================
 

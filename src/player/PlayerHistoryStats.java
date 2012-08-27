@@ -60,6 +60,35 @@ public class PlayerHistoryStats {
         
         
     }
+    
+    public void clear(){
+        games_played = 0;
+        total_time_played = 0;
+
+        total_kills = 0;
+        total_deaths = 0;
+        total_assists = 0;
+        max_kills = 0;
+        max_deaths = 0;
+        double_kills = 0;
+        tripple_kills = 0;
+        quadra_kills = 0;
+        penta_kills = 0;
+
+        total_towers_takedowns = 0;
+        total_wins=0;
+        total_losses=0;
+        total_cs=0;
+
+        total_physical_dmg=0;
+        total_spell_dmg=0;
+        largest_crit_dmg=0;
+        total_gold_earned=0;
+        healing_done=0;
+
+        highest_killing_spree=0;
+        heros_used_times = new HashMap<String, Integer>();
+    }
 //=================================private======================================
 //==============================instance vars===================================
     //for simplisity all instance vars are initialized by value;
@@ -290,7 +319,7 @@ public class PlayerHistoryStats {
     /**
      * @return the total_monster_kills
      */
-    public int getTotal_monster_kills() {
+    public int getTotal_cs() {
         return total_cs;
     }
 

@@ -111,14 +111,16 @@ public class Game {
         System.out.println("========================================================================================");
         System.out.println();
     }
+    
 //=================================private======================================
+    
     private void setBlueCurrStats(int blueKillsLeft, int blueDeathsLeft, int towersTakenBlue){
         for(int i = 0; i < this.getBlue_team().size(); i ++){
             Player p = this.getBlue_team().get(i);
             
             /*dmg*/
             int physical_dmg = (int)(Math.random()*200000);
-            int physical_hits_num = (int)(Math.random()*2000);
+            int physical_hits_num = (int)(Math.random()*2000) + 1; // suppose at least 1 hit
             int physical_miss_num = (int)(Math.random()*1000); // misses are set at most half of hits
             int spell_cast_num = (int)(Math.random()*1500);
             int spell_dmg = (int)(Math.random()*200000);
@@ -155,7 +157,7 @@ public class Game {
             
             /*dmg*/
             int physical_dmg = (int)(Math.random()*200000);
-            int physical_hits_num = (int)(Math.random()*2000);
+            int physical_hits_num = (int)(Math.random()*2000) + 1; // suppose at least 1 hit
             int physical_miss_num = (int)(Math.random()*1000); // misses are set at most half of hits
             int spell_cast_num = (int)(Math.random()*1500);
             int spell_dmg = (int)(Math.random()*200000);

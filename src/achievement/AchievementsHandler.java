@@ -9,6 +9,8 @@ import java.util.*;
 import player.*;
 /**
  * m2w: each player has a AchievementsHandler which has a map of achievements.
+ * For the sake of later expand-ability on achievements and the achievements criteria might 
+ * get more complicated, I decided to create them as actual classes.
  * @author ruobo
  * @lastupdate Aug 19, 2012 
  */
@@ -72,6 +74,3 @@ public class AchievementsHandler {
         this.allAchvmnts = allAchvmnts;
     }
 }
-
-//For the sake of later expand-ability on achievements and the achievements criteria might 
-//get more complicated, I decided to create them as actual classes.

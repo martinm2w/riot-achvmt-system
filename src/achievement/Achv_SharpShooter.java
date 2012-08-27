@@ -15,7 +15,7 @@ import player.*;
 public class Achv_SharpShooter extends Achievement {
     
     public Achv_SharpShooter(){
-        super("SharpShooter");
+        super("SharpShooter", 50);
     }
 
     @Override
@@ -29,22 +29,6 @@ public class Achv_SharpShooter extends Achievement {
         }
         return false;
     }
-
-    /**
-     * m2w: reward 50 ip if fulfilled sharpshooter
-     * @param player 
-     * @lastupdate 8/20/12 3:37 PM
-     */
-    @Override
-    public void rewardIfFullfilled(Player player) {
-        if(player ==null) return;
-        if(!this.isRewarded() && super.isFulfilled()){
-            player.setInfluencePoints(player.getInfluencePoints() + 50);
-            this.setRewarded(true);
-        }
-    }
-//===============================constructor====================================
-//================================public========================================    
 //=================================private======================================
 //==============================instance vars===================================
 //============================setters & getters=================================
