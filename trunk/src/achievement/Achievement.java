@@ -14,19 +14,27 @@ import player.*;
  */
 public abstract class Achievement {
 //===============================constructor====================================
-    public Achievement(String name){
+    public Achievement(String name, int rewardIP){
         this.setAchv_name(name);
         this.setFulfilled(false);
+        this.setRewardIP(rewardIP);
     }
 //================================public========================================    
     public abstract boolean checkAchvCriteria(Player player);
-    public abstract void rewardIfFullfilled(Player player);
+    public void rewardIfFullfilled(Player player) {
+        if(player ==null) return;
+        if(!rewarded && fulfilled){
+            player.setInfluencePoints(player.getInfluencePoints()+getRewardIP());
+            this.setRewarded(true);
+        }
+    }
 //=================================private======================================
 //==============================instance vars===================================
     private boolean fulfilled;
     private String achv_name;
     private boolean newAchv = true;
     private boolean rewarded = false;
+    private int rewardIP = 0;
 //============================setters & getters=================================
 
     /**
@@ -83,6 +91,20 @@ public abstract class Achievement {
      */
     public void setRewarded(boolean rewarded) {
         this.rewarded = rewarded;
+    }
+
+    /**
+     * @return the rewardIP
+     */
+    public int getRewardIP() {
+        return rewardIP;
+    }
+
+    /**
+     * @param rewardIP the rewardIP to set
+     */
+    public void setRewardIP(int rewardIP) {
+        this.rewardIP = rewardIP;
     }
 
 

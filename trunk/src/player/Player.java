@@ -22,10 +22,51 @@ public class Player {
         Achv_handler = new AchievementsHandler();
     }
 //================================public========================================
+    public void updatePlayerIPandExp(){
+        //exp and level
+        curr_level_exp += currStats.getExp_earned();
+        if(curr_level_exp > next_level_exp){
+            level ++;
+            curr_level_exp -= next_level_exp;
+            next_level_exp += level*500;
+        }
+        //ip
+        influencePoints += currStats.getIp_earned();
+    }
+    
+    
+    
     public void printPlayerInfoAndStats(){
         System.out.println("========================================================================================");
-        System.out.println("Player game ID: " + this.getInfo().getGameID() + ", at level (" + );
-        System.out.println("");
+        System.out.println("Player game ID[" + this.getInfo().getGameID() + "],            Current level[" + this.getLevel() + "],            Current IP[" + this.getInfluencePoints() + "],            RP[" + this.getRiotPoints() + "].");
+        System.out.println();
+        System.out.println("-------------- Player Info ----------------");
+        System.out.println("First Name[" + info.getFirstName() + "],            Last Name[" + info.getLastName() + "]");
+        System.out.println("Game ID[" + info.getGameID() + "],              \t Login ID[" + info.getLoginID() + "],      \t Email[" + info.getEmail()+"]");
+        System.out.println();
+        if(currStats != null) {
+            System.out.println("------------ Last game Stats --------------");
+            System.out.println("Hero[" + currStats.getHero_used().getHeroName() + "],           \tGame Time: [" + currStats.getTime_played() + "]          \tCS Count[" + currStats.getCsCount() + "],");
+            System.out.println("Kills[" + currStats.getKills() + "],                \tDeaths[" + currStats.getDeaths() + "],               \tAssists[" + currStats.getAssists() + "],              \tFirstHitKills[" +currStats.getFirst_hit_kills()+ "]" );
+            System.out.println("Physical Dmg[" +currStats.getphysical_dmg()+ "],      \tPhysical Hits["+ currStats.getPhysical_hits_num() +"],       \tPhysical Misses["+currStats.getPhysical_miss_num()+"]");
+            System.out.println("Spell Dmg[" + currStats.getspell_dmg() + "],            \tSpell Casts["+ currStats.getSpell_cast_num() + "],            \tTowers Taken[" + currStats.getTowersTaken() + "]");
+            System.out.println("Exp Earned["+ currStats.getExp_earned() + "],            \tGame IP Earned[" + currStats.getIp_earned() + "]");
+            System.out.println();
+        }else{
+            System.out.println("------------ Last game Stats --------------");
+            System.out.println("### No Last Game Stats Found, Play a Game First! ###");
+            System.out.println();
+        }
+        System.out.println("------------- History Stats --------------");
+        System.out.println("Games Played[" + hisStats.getGames_played() + "],          \tTotal Game Time: [" + hisStats.getTotal_time_played() + "],      \tTotal Wins[" + hisStats.getTotal_wins() + "],");
+        System.out.println("Total losses[" + hisStats.getTotal_losses() + "],          \tTotal CS: [" + hisStats.getTotal_cs() + "],          \tTotal Gold Earned[" +hisStats.getTotal_gold_earned()+ "]");
+        System.out.println("Total Kills[" + hisStats.getTotal_kills() + "],            \tTotal Deaths[" + hisStats.getTotal_deaths() + "],            \tTotal Assists[" + hisStats.getTotal_assists()+ "]");
+        System.out.println("Max Kills[" + hisStats.getMax_kills() + "],            \tMax Deaths[" + hisStats.getMax_deaths() + "],            \tDouble Kills[" + hisStats.getDouble_kills()+ "]");
+        System.out.println("Double Kills[" + hisStats.getDouble_kills() + "],          \tTripple Kills[" + hisStats.getTripple_kills() + "],           \tQuadra Kills[" + hisStats.getQuadra_kills()+ "]");
+        System.out.println("Penta Kills[" + hisStats.getPenta_kills() + "],          \tTotal Towers[" + hisStats.getTotal_towers_takedowns() + "],          \tQuadra Kills[" + hisStats.getQuadra_kills()+ "]");
+        System.out.println("Total Physical dmg[" + hisStats.getTotal_physical_dmg() + "],\tLargest Crit Dmg [" + hisStats.getLargest_crit_dmg() + "],     \tHealing Done[" + hisStats.getHealing_done()+ "]");
+        System.out.println("========================================================================================");
+        System.out.println();
     }
 //=================================private======================================
 
@@ -157,20 +198,6 @@ public class Player {
      */
     public void setsSpells(ArrayList<SommonerSpell> sSpells) {
         this.sSpells = sSpells;
-    }
-
-    /**
-     * @return the cummulative_exp
-     */
-    public int getCummulative_exp() {
-        return cummulative_exp;
-    }
-
-    /**
-     * @param cummulative_exp the cummulative_exp to set
-     */
-    public void setCummulative_exp(int cummulative_exp) {
-        this.cummulative_exp = cummulative_exp;
     }
 
     /**

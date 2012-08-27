@@ -30,8 +30,9 @@ public class PlayerCurrGameStats {
      * @param ip_earned
      * @param hero_used
      * @param csCount
-     * @param towersTaken 
-     * @lastupdate 8/22/12 11:18 PM
+     * @param towersTaken
+     * @param won 
+     * @lastupdate 8/26/12 10:46 AM
      */
     public PlayerCurrGameStats(int physical_dmg, int physical_hits_num, int physical_miss_num, int spell_cast_num, int spell_dmg, int kills, int deaths, int assists, int first_hit_kills, int time_played, int exp_earned, int ip_earned, Hero hero_used, int csCount, int towersTaken, boolean won){
         this.setAssists(assists);
