@@ -74,11 +74,12 @@ public class Game {
         System.out.println("blue total kills: " + game.getTotalBlueKills());
         System.out.println("purple total kills: " + game.getTotalPurpleKills());
         System.out.println("========================================================================================");
-        System.out.println("ID      K\\D\\A           Items          CS count       towers \t");
+        System.out.println("Hero            ID       K\\D\\A           Items          CS count       towers \t");
         for(int i = 0; i < 5; i++){
             Player blueP = game.getBlue_team().get(i);
             //info
             String bluePgameID = blueP.getInfo().getGameID();
+            String hero = blueP.getCurrStats().getHero_used().getHeroName();
             
             String killString = Integer.toString(blueP.getCurrStats().getKills());
             String deathString = Integer.toString(blueP.getCurrStats().getDeaths());
@@ -89,13 +90,14 @@ public class Game {
             String towersTaken = Integer.toString(blueP.getCurrStats().getTowersTaken());
                     
             //stats
-            System.out.print(bluePgameID + "    \t" + kdaString + "    \t" + "items" + "    \t" + CsString + "        \t" + towersTaken + "    \t\n");
+            System.out.print( hero + "    \t" + bluePgameID + "    \t" + kdaString + "    \t" + "items" + "    \t" + CsString + "        \t" + towersTaken + "    \t\n");
         }
         System.out.println("-------------------------------------------------------------------------------------------");
         for(int i = 0; i < 5; i++){
             Player PurpleP = game.getPurple_team().get(i);
             //info
             String PurplePgameID = PurpleP.getInfo().getGameID();
+            String hero = PurpleP.getCurrStats().getHero_used().getHeroName();
             
             String killString = Integer.toString(PurpleP.getCurrStats().getKills());
             String deathString = Integer.toString(PurpleP.getCurrStats().getDeaths());
@@ -106,7 +108,7 @@ public class Game {
             String towersTaken = Integer.toString(PurpleP.getCurrStats().getTowersTaken());
                     
             //stats
-            System.out.print(PurplePgameID + "    \t" + kdaString + "    \t" + "items" + "    \t" + CsString + "        \t" + towersTaken + "    \t\n");
+            System.out.print( hero + "    \t" + PurplePgameID + "    \t" + kdaString + "    \t" + "items" + "    \t" + CsString + "        \t" + towersTaken + "    \t\n");
         }
         System.out.println("========================================================================================");
         System.out.println();
