@@ -43,7 +43,8 @@ public class Game {
      *      4. both team will have 11 as the max number of towers taken down, and the team winning will
      *         have at least 5 towers taken down, in order to reach the nexus.(not sure if inhibitors are 
      *          counted as towers too, assuming they're not)
-     *      5. more random generation explanation will be included in the comment after the calculation .
+     *      5. no surrender before 20 mins. at most 1:05 long.
+     *      6. more random generation explanation will be included in the comment after the calculation .
      * @lastupdate: 8/27/12 9:37 PM
      */
     public void gameStart(){
@@ -108,9 +109,10 @@ public class Game {
         System.out.println("purple total kills: " + this.getTotalPurpleKills());
         System.out.println("========================================================================================");
         System.out.println("Hero            ID       K\\D\\A           Items          CS count       towers \t");
+        
+        /*get blue's stats from their CurrGameStats Object and print them*/
         for(int i = 0; i < 5; i++){
             Player blueP = this.getBlue_team().get(i);
-            //info
             String bluePgameID = blueP.getInfo().getGameID();
             String hero = blueP.getCurrStats().getHero_used().getHeroName();
             
@@ -122,13 +124,12 @@ public class Game {
             String CsString = Integer.toString(blueP.getCurrStats().getCsCount());
             String towersTaken = Integer.toString(blueP.getCurrStats().getTowersTaken());
                     
-            //stats
             System.out.print( hero + "    \t" + bluePgameID + "    \t" + kdaString + "    \t" + "items" + "    \t" + CsString + "        \t" + towersTaken + "    \t\n");
         }
         System.out.println("-------------------------------------------------------------------------------------------");
+        /*get purple's stats from their CurrGameStats Object and print them*/
         for(int i = 0; i < 5; i++){
             Player PurpleP = this.getPurple_team().get(i);
-            //info
             String PurplePgameID = PurpleP.getInfo().getGameID();
             String hero = PurpleP.getCurrStats().getHero_used().getHeroName();
             
@@ -154,11 +155,11 @@ public class Game {
             
             /*dmg*/
             int physical_dmg = (int)(Math.random()*200000);
-            int physical_hits_num = (int)(Math.random()*2000) + 1; // suppose at least 1 hit
-            int physical_miss_num = (int)(Math.random()*1000); // misses are set at most half of hits
-            int spell_cast_num = (int)(Math.random()*1500);
-            int spell_dmg = (int)(Math.random()*200000);
-            int csCount = (int)(Math.random()*400);            // should be related to game time, omitted for simplicity here.
+            int physical_hits_num = (int)(Math.random()*2000) + 1;              // suppose at least 1 hit
+            int physical_miss_num = (int)(Math.random()*1000);                  // misses are set at most half of hits
+            int spell_cast_num = (int)(Math.random()*800);                      // is set less than physical hits
+            int spell_dmg = (int)(Math.random()*200000);                        // spell dmg should be related to hero's type in reality, ingored for simplicity.
+            int csCount = (int)(Math.random()*400);                             // should be related to game time, omitted for simplicity here.
             
             /*KDAs*/
             int kills = (i == this.getBlue_team().size()-1) ? blueKillsLeft : (int)(Math.random()*blueKillsLeft); 
@@ -180,6 +181,7 @@ public class Game {
                 ip_earned+=100;
                 won = true;
             }
+            //create currstats object, give it to each player
             PlayerCurrGameStats curStats = new PlayerCurrGameStats(physical_dmg, physical_hits_num, physical_miss_num, spell_cast_num, spell_dmg, kills, deaths, assists, first_hit_kills, time_played, exp_earned, ip_earned, Heros.heroesList.get(i), csCount, towersTaken, won);
             p.setCurrStats(curStats);
         }
@@ -191,11 +193,11 @@ public class Game {
             
             /*dmg*/
             int physical_dmg = (int)(Math.random()*200000);
-            int physical_hits_num = (int)(Math.random()*2000) + 1; // suppose at least 1 hit
-            int physical_miss_num = (int)(Math.random()*1000); // misses are set at most half of hits
-            int spell_cast_num = (int)(Math.random()*1500);
-            int spell_dmg = (int)(Math.random()*200000);
-            int csCount = (int)(Math.random()*400);            // should be related to game time, omitted for simplicity here.
+            int physical_hits_num = (int)(Math.random()*2000) + 1;              // suppose at least 1 hit
+            int physical_miss_num = (int)(Math.random()*1000);                  // misses are set at most half of hits
+            int spell_cast_num = (int)(Math.random()*800);                      // is set less than physical hits
+            int spell_dmg = (int)(Math.random()*200000);                        // spell dmg should be related to hero's type in reality, ingored for simplicity.
+            int csCount = (int)(Math.random()*400);                             // should be related to game time, omitted for simplicity here.
             
             /*KDAs*/
             int kills = (i == this.getPurple_team().size()-1)? purpleKillsLeft : (int)(Math.random()*purpleKillsLeft); 
@@ -216,7 +218,7 @@ public class Game {
                 ip_earned+=100;
                 won = true;
             }
-            
+            //create currstats object, give it to each player
             PlayerCurrGameStats curStats = new PlayerCurrGameStats(physical_dmg, physical_hits_num, physical_miss_num, spell_cast_num, spell_dmg, kills, deaths, assists, first_hit_kills, time_played, exp_earned, ip_earned, Heros.heroesList.get(i), csCount, towersTaken, won);
             p.setCurrStats(curStats);
         }
@@ -225,7 +227,7 @@ public class Game {
     private ArrayList<Player> purple_team;
     private ArrayList<Player> blue_team;
     private boolean hasEnded = false;
-    private int elapsedTime =  (int)(Math.random()*(40)) + 20; //no surrender before 20
+    private int elapsedTime =  (int)(Math.random()*(45)) + 20; //no surrender before 20
     private boolean blueWins = false;
     private int totalBlueKills = 0;
     private int totalPurpleKills = 0;
