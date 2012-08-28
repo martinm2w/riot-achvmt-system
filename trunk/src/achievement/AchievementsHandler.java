@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package achievement;
 
 import java.util.*;
@@ -72,5 +67,68 @@ public class AchievementsHandler {
      */
     public void setAllAchvmnts(HashMap<String, Achievement> allAchvmnts) {
         this.allAchvmnts = allAchvmnts;
+    }
+}
+//===============================inner classes==================================
+class Achv_BigWinner extends Achievement{
+    public Achv_BigWinner(){
+        super("Big Winner", 300);
+    }
+    @Override
+    public boolean checkAchvCriteria(Player player) {
+        if(player ==null) return false;
+        int totalWin = player.getHisStats().getTotal_wins();
+        if(totalWin>=200){
+            return true;
+        }
+        return false;
+    }
+}
+
+class Achv_Bruiser extends Achievement {
+    public Achv_Bruiser(){
+        super("Bruiser", 50);
+    }
+    @Override
+    public boolean checkAchvCriteria(Player player) {
+        if(player ==null) return false;
+        int currGameDmg = player.getCurrStats().getphysical_dmg();
+        if(currGameDmg >= 500){
+            return true;
+        }
+        return false;
+    }
+}
+
+
+class Achv_SharpShooter extends Achievement {
+    public Achv_SharpShooter(){
+        super("SharpShooter", 50);
+    }
+    @Override
+    public boolean checkAchvCriteria(Player player) {
+        if(player ==null) return false;
+        int totalHit = player.getCurrStats().getPhysical_hits_num();
+        int totalMiss = player.getCurrStats().getPhysical_miss_num();
+        double accuracy = (double)totalHit / (double)(totalHit+totalMiss);
+        if(accuracy >= 0.75){
+            return true;
+        }
+        return false;
+    }
+}
+
+class Achv_Veteran extends Achievement {
+    public Achv_Veteran(){
+        super("Veteran", 200);
+    }
+    @Override
+    public boolean checkAchvCriteria(Player player) {
+        if(player == null) return false;
+        int gamesPlayed = player.getHisStats().getGames_played();
+        if(gamesPlayed >= 1000){
+            return true;
+        }
+        return false;
     }
 }
