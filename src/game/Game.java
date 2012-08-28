@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package game;
 
 import java.util.*;
@@ -10,35 +5,70 @@ import player.*;
 import heroes.*;
 
 /**
- * m2w: this class tends to emulate the game client. 
- * The java platform passes in infos like who the players are, which team their on, which heros they are using.
- * Then the client starts and passes back finished current game stats to the java platform.
+ * m2w: this class simulates the game client, the Java Platfrom passes in Game setup,
+ *      and runs the client. This class shares the same Player Objects (both teams) 
+ *      as the MatchProcess class, passed in when creating Game instance.
+ * -----------------------------------------------------------------------------
+ *      this class has 3 major methods:
+ *      1. gameStart() : starts the game, generating current game stats for each player
+ *          in their CurrGameStats Objects.
+ *
+ *      2. gameEnd(): set the game status as hasEnded.
+ *      3. printGameSummary() : Prints each games summary after each game run. Similar
+ *          to the actual game summary format.
+ * -----------------------------------------------------------------------------
  * @author ruobo
  * @lastupdate Aug 17, 2012 
  */
 public class Game {
 //===============================constructor====================================
+    /**
+     * m2w: both team players Objects are passed in from MatchProcess when creating a
+     *      new game.
+     * @param blue_team
+     * @param purple_team 
+     */
     public Game(ArrayList<Player> blue_team, ArrayList<Player> purple_team){
         this.setBlue_team(blue_team);
         this.setPurple_team(purple_team);
-        
     }
 //================================public========================================        
     /**
-     * m2w: this method simulates the game process, generate each player's behavior for end game results.
-     * for simplicity, ignored that total blue kill should equals to total purple deaths.
+     * m2w: This method simulates the game process, generate each player's behavior for end game results.
+     *      This method has a few simulation features:
+     *      1. won team will have more kills.
+     *      2. total blue team kills will match total purple team deaths
+     *      3. player will at least have 1 physical hit, for sharpshooter achievements won't be getting
+     *         a divided by 0 exception.
+     *      4. both team will have 11 as the max number of towers taken down, and the team winning will
+     *         have at least 5 towers taken down, in order to reach the nexus.(not sure if inhibitors are 
+     *          counted as towers too, assuming they're not)
+     *      5. more random generation explanation will be included in the comment after the calculation .
+     * @lastupdate: 8/27/12 9:37 PM
      */
     public void gameStart(){
         /*generate winner*/
         int winRand = (int)(Math.random()*10);
         if(winRand >= 5) setBlueWins(true);
         
-        if(isBlueWins()){//if blue team wins, given blue team 20 more kills
+        /*generate towers and kills*/
+        int towersTakenBlue = 0;
+        int towersTakenPurple = 0;
+        if(isBlueWins()){
+            //if blue team wins, given blue team 20 more kills
             setTotalBlueKills((int)(Math.random()*50)+20);
             setTotalPurpleKills((int)(Math.random()*50));
-        }else{//else give purple team 20 more kills.
+            //if blue wins will have at least 5 towers down.
+            towersTakenBlue = (int)(Math.random()*6)+5;
+            towersTakenPurple = (int)(Math.random()*11);
+        }else{
+            //else give purple team 20 more kills.
             setTotalBlueKills((int)(Math.random()*50));
             setTotalPurpleKills((int)(Math.random()*50)+20);
+            
+            //if purple wins will have at least 5 towers down.
+            towersTakenPurple = (int)(Math.random()*6)+5;
+            towersTakenBlue = (int)(Math.random()*11);
         }
 
         /* KDAs*/
@@ -47,36 +77,39 @@ public class Game {
         int blueDeathsLeft = getTotalPurpleKills();  //these 2 are for the deaths for each player.
         int purpleDeathsLeft = getTotalBlueKills();  //total blue kills should match total purple deaths.
                                                 //assists will generate randomly between 0-20
-        int towersTakenBlue = 11;
-        int towersTakenPurple = 11;
+        
                                                
-        /*blue team*/
+        /*generating blue team stats*/
         this.setBlueCurrStats(blueKillsLeft, blueDeathsLeft, towersTakenBlue);
-        /*purple team*/
+        /*generating purple team stats*/
         this.setPurpleCurrStats(purpleKillsLeft, purpleDeathsLeft, towersTakenPurple);
     }
     
     /**
      * m2w: this method sets the game status to hasEnded.
+     * @lastupdate 8/27/12 9:52 PM
      */
     public void gameEnd(){
         this.setHasEnded(true);
-
     }
     
-    
-    public void printGameSummary(Game game){
-        if(game.isBlueWins()){
+    /**
+     * m2w: this is the 3rd step in the run game command in MatchProcess class. 
+     *      This method prints out current game summaries.
+     * @lastupdate 8/27/12 9:55 PM
+     */
+    public void printGameSummary(){
+        if(this.isBlueWins()){
             System.out.println("blue team won");
         }else{
             System.out.println("purple team won");
         }
-        System.out.println("blue total kills: " + game.getTotalBlueKills());
-        System.out.println("purple total kills: " + game.getTotalPurpleKills());
+        System.out.println("blue total kills: " + this.getTotalBlueKills());
+        System.out.println("purple total kills: " + this.getTotalPurpleKills());
         System.out.println("========================================================================================");
         System.out.println("Hero            ID       K\\D\\A           Items          CS count       towers \t");
         for(int i = 0; i < 5; i++){
-            Player blueP = game.getBlue_team().get(i);
+            Player blueP = this.getBlue_team().get(i);
             //info
             String bluePgameID = blueP.getInfo().getGameID();
             String hero = blueP.getCurrStats().getHero_used().getHeroName();
@@ -94,7 +127,7 @@ public class Game {
         }
         System.out.println("-------------------------------------------------------------------------------------------");
         for(int i = 0; i < 5; i++){
-            Player PurpleP = game.getPurple_team().get(i);
+            Player PurpleP = this.getPurple_team().get(i);
             //info
             String PurplePgameID = PurpleP.getInfo().getGameID();
             String hero = PurpleP.getCurrStats().getHero_used().getHeroName();
@@ -115,7 +148,6 @@ public class Game {
     }
     
 //=================================private======================================
-    
     private void setBlueCurrStats(int blueKillsLeft, int blueDeathsLeft, int towersTakenBlue){
         for(int i = 0; i < this.getBlue_team().size(); i ++){
             Player p = this.getBlue_team().get(i);
