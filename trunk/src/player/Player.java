@@ -15,11 +15,16 @@ import java.util.*;
  *      instance is created.
  *      ------------------------------------------------------------------------
  *      It contains several instance vars:
- *      1. player's IP, RP, EXP, and Level, etc, these game related info are created
- *          as instance variables.
+ *      1. player's IP, RP, EXP, and Level, etc, these game related info are saved
+ *          for each player.
  *      2. PlayerInfo object: this was passed in while creating the Player Objects,
  *          which contains information about the player, like names, IDs, etc.
- *      3. 
+ *      3. Player's PlayerCurrGameStats Object, containing generated info for the 
+ *          game just finished.
+ *      4. Player's PlayerHistoryStats, containing history stats of the player, such
+ *          as total kills and total deaths.
+ *      5. An AchievementsHandler Object, contains all achievement info for the player,
+ *          and handles the update, check, and reward on the achievements.
  *          
  * @author ruobo
  * @lastupdate Aug 17, 2012 
@@ -32,20 +37,27 @@ public class Player {
         Achv_handler = new AchievementsHandler();
     }
 //================================public========================================
+    /**
+     * m2w: this method update player's exp and Ip after each game, if current exp
+     *      exceeds next_level_exp(required exp for leveling up) then will level up,
+     *      then next required level up EXP will increase.
+     *      total exp earned is omitted for simplicity.
+     */
     public void updatePlayerIPandExp(){
-        //exp and level
-        curr_level_exp += currStats.getExp_earned();
-        if(curr_level_exp > next_level_exp){
-            level ++;
-            curr_level_exp -= next_level_exp;
-            next_level_exp += level*500;
+        curr_level_exp += currStats.getExp_earned(); //adding current game earned exp
+        if(curr_level_exp > next_level_exp){        // if curr exp is enough for leveling up.
+            level ++;                               // increase level, 
+            curr_level_exp -= next_level_exp;       // last level earned exp was subtracted.
+            next_level_exp += level*500;            // requirment increase after level up.
         }
         //ip
-        influencePoints += currStats.getIp_earned();
+        influencePoints += currStats.getIp_earned(); // increased ip after the game.
     }
     
-    
-    
+    /**
+     * m2w: this is the "stats(gameID)" command that was called in MatchProcess class, prints player info,
+     *      player last game stats, history stats.
+     */
     public void printPlayerInfoAndStats(){
         System.out.println("========================================================================================");
         System.out.println("Player game ID[" + this.getInfo().getGameID() + "],            Current level[" + this.getLevel() + "],            Current IP[" + this.getInfluencePoints() + "],            RP[" + this.getRiotPoints() + "].");
@@ -81,21 +93,20 @@ public class Player {
 //=================================private======================================
 
 //==============================instance vars===================================
-    private PlayerInfo info;
-    private PlayerHistoryStats hisStats;
-    private PlayerCurrGameStats currStats; 
-    private AchievementsHandler Achv_handler;
+    private PlayerInfo info;                    //player info, first name , last name , email, etc.
+    private PlayerHistoryStats hisStats;        //player histroy info, total kills, total games, total times,  etc.
+    private PlayerCurrGameStats currStats;      //player current/last game stats, kills, dmg, hits, towers, etc.
+    private AchievementsHandler Achv_handler;   //player's achievements, are they rewarded, are they fulfilled, etc.
     
-    private int level = 1;
-    private int curr_level_exp = 0;
-    //need to change this
-    private int next_level_exp = 480;
-    private int riotPoints;
-    private int influencePoints;
+    private int level = 1;                      //player's level, starting at 1.
+    private int curr_level_exp = 0;             //player's current level earned exp, starting at 0
+    //need to change this                   
+    private int next_level_exp = 480;           //exp required for level up.
+    private int riotPoints;                     //player's riot points.
+    private int influencePoints;                //player's influence points.
     
-    private ArrayList<Champion> championList; 
+    private ArrayList<Champion> championList;   //player's championlist.
     private ArrayList<SommonerSpell> sSpells;
-    
 //============================setters & getters=================================
 
     /**
