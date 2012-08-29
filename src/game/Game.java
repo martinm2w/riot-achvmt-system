@@ -17,6 +17,7 @@ import player.*;
  *      3. printGameSummary() : Prints each games summary after each game run. Similar
  *          to the actual game summary format.
  * -----------------------------------------------------------------------------
+ *      note:  in the comments, "current game" and "last game" are the same thing.
  * @author ruobo
  * @lastupdate Aug 17, 2012 
  */

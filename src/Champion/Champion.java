@@ -22,9 +22,37 @@ public class Champion {
         this.setChampionName(championName);
     }
 //==================================public======================================
+    /**
+     * m2w: overrided for being able to use champion as keys for hashmaps in Player Objects.
+     * @param obj
+     * @return 
+     */
+    @Override
+    public boolean equals(Object obj){
+        Champion champ = (Champion)obj;
+        if(champ.getChampionName().equalsIgnoreCase(this.getChampionName())){
+            return true;
+        }
+        return false;
+    }
+    
+    /**
+     * m2w: has to override hashcode because if 2 champs are considered as equals by having same
+     *      champ names, their hashcode has to be the same.
+     * @return 
+     */
+    @Override
+    public int hashCode(){
+        int hashcode = 0;
+        for(int i = 0; i < this.getChampionName().length(); i++){
+            char c = this.getChampionName().charAt(i);
+            hashcode += c;// so same string will return the same hashcode now.
+        }
+        return hashcode;
+    }
 //=================================private======================================
 //==============================instance vars===================================
-    private String championName;
+    private String championName; 
     private String lore = "some lore of " + championName;
     private String tipsAndItems = "use me wisely";
 //    private ArrayList<Ability> abilities;//omitted for simplicity
