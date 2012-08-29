@@ -3,9 +3,13 @@ package achievement;
 import java.util.*;
 import player.*;
 /**
- * m2w: each player has a AchievementsHandler which has a map of achievements.
- * For the sake of later expand-ability on achievements and the achievements criteria might 
- * get more complicated, I decided to create them as actual classes.
+ * m2w: each player has a AchievementsHandler which has a map of achievements. 
+ *      1. At this stage of the design, I decided to create them as inner classes. 
+ *          For different achievements has different requirement calculations.
+ *      2. If we need many more, say 100-200 achievements, we might need to separate them 
+ *          into different categories, e.g: physical related achievements, 
+ *          containing "sharpshooter" and "bruiser". etc. And make different classes containing 
+ *          these inner classes, for cleaner and more readable code structure.
  * @author ruobo
  * @lastupdate Aug 19, 2012 
  */
@@ -27,7 +31,9 @@ public class AchievementsHandler {
     }
 //================================public========================================    
     /**
-     * m2w: this wrapper method runs in the Match Process class's run match command
+     * m2w: this wrapper method runs in the Match Process class's run match command,
+     *      it first update the player's achv status, and will reward if any un-rewarded
+     *      and fulfilled achievement is found.
      *      2. update player history stats, achievements, ip, exp, level.
      *           this.updatePlayerHistStats();
      *           this.updatePlayerAchvStats();     <------- here
@@ -40,8 +46,10 @@ public class AchievementsHandler {
     }
 //=================================private======================================
     /**
-     * m2w: this method checks the player's achievements. and will set to fulfilled if the criteria was met.
+     * m2w: this method checks the player's achievements, and will set to fulfilled 
+     *      if the criteria was met.
      * @param player 
+     * @lastupdate 8/19/12 
      */
     private void updateAchvmntsStats(Player player){
         for(String achvName : allAchvmnts.keySet()){

@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Champion;
 
 import java.util.*;
@@ -10,6 +5,10 @@ import java.util.*;
 /**
  * m2w: this class contains the available champion list for each players. (it's only
  *      used when creating each player's CurrGameStats Object.)
+ *      There are two static variables in this class:
+ *      1. championsMap: for searching champion Object by name string.
+ *      2. championesList: only for giving different champs for each player while 
+ *          creating their CurrGameStats.
  * @author ruobo
  * @lastupdate Aug 20, 2012 
  */
