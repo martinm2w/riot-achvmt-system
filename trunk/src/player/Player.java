@@ -5,8 +5,8 @@
 
 package player;
 
+import Champion.*;
 import achievement.*;
-import heroes.*;
 import java.util.*;
 
 /**
@@ -46,7 +46,7 @@ public class Player {
         System.out.println();
         if(currStats != null) {
             System.out.println("------------ Last game Stats --------------");
-            System.out.println("Hero[" + currStats.getHero_used().getHeroName() + "],           \tGame Time: [" + currStats.getTime_played() + "]          \tCS Count[" + currStats.getCsCount() + "],");
+            System.out.println("Champion[" + currStats.getChampion_used().getChampionName() + "],           \tGame Time: [" + currStats.getTime_played() + "]          \tCS Count[" + currStats.getCsCount() + "],");
             System.out.println("Kills[" + currStats.getKills() + "],                \tDeaths[" + currStats.getDeaths() + "],               \tAssists[" + currStats.getAssists() + "],              \tFirstHitKills[" +currStats.getFirst_hit_kills()+ "]" );
             System.out.println("Physical Dmg[" +currStats.getphysical_dmg()+ "],      \tPhysical Hits["+ currStats.getPhysical_hits_num() +"],       \tPhysical Misses["+currStats.getPhysical_miss_num()+"]");
             System.out.println("Spell Dmg[" + currStats.getspell_dmg() + "],            \tSpell Casts["+ currStats.getSpell_cast_num() + "],            \tTowers Taken[" + currStats.getTowersTaken() + "]");
@@ -83,7 +83,7 @@ public class Player {
     private int riotPoints;
     private int influencePoints;
     
-    private ArrayList<Hero> heroList; 
+    private ArrayList<Champion> championList; 
     private ArrayList<SommonerSpell> sSpells;
     
 //============================setters & getters=================================
@@ -173,17 +173,17 @@ public class Player {
     }
 
     /**
-     * @return the heroList
+     * @return the championList
      */
-    public ArrayList<Hero> getHeroList() {
-        return heroList;
+    public ArrayList<Champion> getChampionList() {
+        return championList;
     }
 
     /**
-     * @param heroList the heroList to set
+     * @param championList the championList to set
      */
-    public void setHeroList(ArrayList<Hero> heroList) {
-        this.heroList = heroList;
+    public void setChampionList(ArrayList<Champion> championList) {
+        this.championList = championList;
     }
 
     /**
