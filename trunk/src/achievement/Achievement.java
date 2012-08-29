@@ -14,6 +14,12 @@ import player.*;
  */
 public abstract class Achievement {
 //===============================constructor====================================
+    /**
+     * m2w: sub-classes' constructor must pass in to the super constructor, its
+     *      achievement name and how much IP will be rewarded if fulfilled.
+     * @param name
+     * @param rewardIP 
+     */
     public Achievement(String name, int rewardIP){
         this.setAchv_name(name);
         this.setFulfilled(false);
@@ -30,7 +36,8 @@ public abstract class Achievement {
     
     /**
      * m2w: this method checks 2 instance variables of the certain player's achievement
-     *      sub-class. see if the achievement is not rewarded and has fulfilled.
+     *      sub-class, see if the achievement is not rewarded and has fulfilled. 
+     *      If it is, will reward the player with IP and set the rewarded variable as true.
      * @param player 
      */
     public void rewardIfFullfilled(Player player) {

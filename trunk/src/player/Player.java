@@ -10,7 +10,17 @@ import achievement.*;
 import java.util.*;
 
 /**
- *
+ * m2w: this class is used to create each player's Objects, with different player
+ *      info, its current stats and history stats are empty while the new player
+ *      instance is created.
+ *      ------------------------------------------------------------------------
+ *      It contains several instance vars:
+ *      1. player's IP, RP, EXP, and Level, etc, these game related info are created
+ *          as instance variables.
+ *      2. PlayerInfo object: this was passed in while creating the Player Objects,
+ *          which contains information about the player, like names, IDs, etc.
+ *      3. 
+ *          
  * @author ruobo
  * @lastupdate Aug 17, 2012 
  */
