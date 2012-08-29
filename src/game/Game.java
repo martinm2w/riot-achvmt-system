@@ -1,8 +1,8 @@
 package game;
 
+import Champion.Champions;
 import java.util.*;
 import player.*;
-import heroes.*;
 
 /**
  * m2w: this class simulates the game client, the Java Platfrom passes in Game setup,
@@ -108,13 +108,13 @@ public class Game {
         System.out.println("blue total kills: " + this.getTotalBlueKills());
         System.out.println("purple total kills: " + this.getTotalPurpleKills());
         System.out.println("========================================================================================");
-        System.out.println("Hero            ID       K\\D\\A           Items          CS count       towers \t");
+        System.out.println("Champion        ID      K\\D\\A           Items          CS count       towers \t");
         
         /*get blue's stats from their CurrGameStats Object and print them*/
         for(int i = 0; i < 5; i++){
             Player blueP = this.getBlue_team().get(i);
             String bluePgameID = blueP.getInfo().getGameID();
-            String hero = blueP.getCurrStats().getHero_used().getHeroName();
+            String champion = blueP.getCurrStats().getChampion_used().getChampionName();
             
             String killString = Integer.toString(blueP.getCurrStats().getKills());
             String deathString = Integer.toString(blueP.getCurrStats().getDeaths());
@@ -124,14 +124,14 @@ public class Game {
             String CsString = Integer.toString(blueP.getCurrStats().getCsCount());
             String towersTaken = Integer.toString(blueP.getCurrStats().getTowersTaken());
                     
-            System.out.print( hero + "    \t" + bluePgameID + "    \t" + kdaString + "    \t" + "items" + "    \t" + CsString + "        \t" + towersTaken + "    \t\n");
+            System.out.print( champion + "    \t" + bluePgameID + "    \t" + kdaString + "    \t" + "items" + "    \t" + CsString + "        \t" + towersTaken + "    \t\n");
         }
         System.out.println("-------------------------------------------------------------------------------------------");
         /*get purple's stats from their CurrGameStats Object and print them*/
         for(int i = 0; i < 5; i++){
             Player PurpleP = this.getPurple_team().get(i);
             String PurplePgameID = PurpleP.getInfo().getGameID();
-            String hero = PurpleP.getCurrStats().getHero_used().getHeroName();
+            String champion = PurpleP.getCurrStats().getChampion_used().getChampionName();
             
             String killString = Integer.toString(PurpleP.getCurrStats().getKills());
             String deathString = Integer.toString(PurpleP.getCurrStats().getDeaths());
@@ -142,13 +142,20 @@ public class Game {
             String towersTaken = Integer.toString(PurpleP.getCurrStats().getTowersTaken());
                     
             //stats
-            System.out.print( hero + "    \t" + PurplePgameID + "    \t" + kdaString + "    \t" + "items" + "    \t" + CsString + "        \t" + towersTaken + "    \t\n");
+            System.out.print( champion + "    \t" + PurplePgameID + "    \t" + kdaString + "    \t" + "items" + "    \t" + CsString + "        \t" + towersTaken + "    \t\n");
         }
         System.out.println("========================================================================================");
         System.out.println();
     }
     
 //=================================private======================================
+    /**
+     * m2w: this method sets the current stats for blue team, won team will have more 
+     *      kills and at least 5 towers that's why the generated kills and towers are passed in as args.
+     * @param blueKillsLeft 
+     * @param blueDeathsLeft
+     * @param towersTakenBlue 
+     */
     private void setBlueCurrStats(int blueKillsLeft, int blueDeathsLeft, int towersTakenBlue){
         for(int i = 0; i < this.getBlue_team().size(); i ++){
             Player p = this.getBlue_team().get(i);
@@ -158,7 +165,7 @@ public class Game {
             int physical_hits_num = (int)(Math.random()*2000) + 1;              // suppose at least 1 hit
             int physical_miss_num = (int)(Math.random()*1000);                  // misses are set at most half of hits
             int spell_cast_num = (int)(Math.random()*800);                      // is set less than physical hits
-            int spell_dmg = (int)(Math.random()*200000);                        // spell dmg should be related to hero's type in reality, ingored for simplicity.
+            int spell_dmg = (int)(Math.random()*200000);                        // spell dmg should be related to champion's type in reality, ingored for simplicity.
             int csCount = (int)(Math.random()*400);                             // should be related to game time, omitted for simplicity here.
             
             /*KDAs*/
@@ -182,11 +189,18 @@ public class Game {
                 won = true;
             }
             //create currstats object, give it to each player
-            PlayerCurrGameStats curStats = new PlayerCurrGameStats(physical_dmg, physical_hits_num, physical_miss_num, spell_cast_num, spell_dmg, kills, deaths, assists, first_hit_kills, time_played, exp_earned, ip_earned, Heros.heroesList.get(i), csCount, towersTaken, won);
+            PlayerCurrGameStats curStats = new PlayerCurrGameStats(physical_dmg, physical_hits_num, physical_miss_num, spell_cast_num, spell_dmg, kills, deaths, assists, first_hit_kills, time_played, exp_earned, ip_earned, Champions.championesList.get(i), csCount, towersTaken, won);
             p.setCurrStats(curStats);
         }
     }
     
+    /**
+     * m2w: this method sets the current stats for purple team, won team will have more 
+     *      kills and at least 5 towers that's why the generated kills and towers are passed in as args.
+     * @param purpleKillsLeft
+     * @param purpleDeathsLeft
+     * @param towersTakenPurple 
+     */
     private void setPurpleCurrStats(int purpleKillsLeft, int purpleDeathsLeft, int towersTakenPurple){
         for(int i = 0; i < this.getPurple_team().size(); i ++){
             Player p = this.getPurple_team().get(i);
@@ -196,7 +210,7 @@ public class Game {
             int physical_hits_num = (int)(Math.random()*2000) + 1;              // suppose at least 1 hit
             int physical_miss_num = (int)(Math.random()*1000);                  // misses are set at most half of hits
             int spell_cast_num = (int)(Math.random()*800);                      // is set less than physical hits
-            int spell_dmg = (int)(Math.random()*200000);                        // spell dmg should be related to hero's type in reality, ingored for simplicity.
+            int spell_dmg = (int)(Math.random()*200000);                        // spell dmg should be related to champion's type in reality, ingored for simplicity.
             int csCount = (int)(Math.random()*400);                             // should be related to game time, omitted for simplicity here.
             
             /*KDAs*/
@@ -219,7 +233,7 @@ public class Game {
                 won = true;
             }
             //create currstats object, give it to each player
-            PlayerCurrGameStats curStats = new PlayerCurrGameStats(physical_dmg, physical_hits_num, physical_miss_num, spell_cast_num, spell_dmg, kills, deaths, assists, first_hit_kills, time_played, exp_earned, ip_earned, Heros.heroesList.get(i), csCount, towersTaken, won);
+            PlayerCurrGameStats curStats = new PlayerCurrGameStats(physical_dmg, physical_hits_num, physical_miss_num, spell_cast_num, spell_dmg, kills, deaths, assists, first_hit_kills, time_played, exp_earned, ip_earned, Champions.championesList.get(i), csCount, towersTaken, won);
             p.setCurrStats(curStats);
         }
     }

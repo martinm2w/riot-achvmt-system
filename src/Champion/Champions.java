@@ -8,7 +8,8 @@ package Champion;
 import java.util.*;
 
 /**
- *
+ * m2w: this class contains the available champion list for each players. (it's only
+ *      used when creating each player's CurrGameStats Object.)
  * @author ruobo
  * @lastupdate Aug 20, 2012 
  */

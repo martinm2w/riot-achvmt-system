@@ -51,11 +51,11 @@ public class PlayerHistoryStats {
         healing_done += (int)(Math.random()*1000);
         int currMaxKillSpree = (int)(Math.random()*(currStats.getKills()));
         highest_killing_spree = (currMaxKillSpree> highest_killing_spree) ? currMaxKillSpree : highest_killing_spree;
-        Integer currTimes = heros_used_times.get(currStats.getHero_used().getHeroName());
+        Integer currTimes = champions_used_times.get(currStats.getChampion_used().getChampionName());
         if(currTimes == null){
-            heros_used_times.put(currStats.getHero_used().getHeroName(), 1);
+            champions_used_times.put(currStats.getChampion_used().getChampionName(), 1);
         }else{
-            heros_used_times.put(currStats.getHero_used().getHeroName(), currTimes++);
+            champions_used_times.put(currStats.getChampion_used().getChampionName(), currTimes++);
         }
         
         
@@ -87,7 +87,7 @@ public class PlayerHistoryStats {
         healing_done=0;
 
         highest_killing_spree=0;
-        heros_used_times = new HashMap<String, Integer>();
+        champions_used_times = new HashMap<String, Integer>();
     }
 //=================================private======================================
 //==============================instance vars===================================
@@ -117,7 +117,7 @@ public class PlayerHistoryStats {
     private int healing_done=0;
     
     private int highest_killing_spree=0;
-    private HashMap<String, Integer> heros_used_times = new HashMap<String, Integer>();//omitted hero kda in the actual ranked stats tab.
+    private HashMap<String, Integer> champions_used_times = new HashMap<String, Integer>();//omitted champion kda in the actual ranked stats tab.
 //============================setters & getters=================================
 
     /**
@@ -415,16 +415,16 @@ public class PlayerHistoryStats {
     }
 
     /**
-     * @return the heros_used_times
+     * @return the champions_used_times
      */
-    public HashMap<String, Integer> getHeros_used_times() {
-        return heros_used_times;
+    public HashMap<String, Integer> getChampions_used_times() {
+        return champions_used_times;
     }
 
     /**
-     * @param heros_used_times the heros_used_times to add
+     * @param champions_used_times the champions_used_times to add
      */
-    public void addHeros_used_times(HashMap<String, Integer> heros_used_times) {
-        this.heros_used_times = heros_used_times;
+    public void addChampions_used_times(HashMap<String, Integer> champions_used_times) {
+        this.champions_used_times = champions_used_times;
     }
 }

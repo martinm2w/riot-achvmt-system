@@ -5,7 +5,7 @@
 
 package player;
 
-import heroes.Hero;
+import Champion.*;
 
 /**
  *
@@ -28,13 +28,13 @@ public class PlayerCurrGameStats {
      * @param time_played
      * @param exp_earned
      * @param ip_earned
-     * @param hero_used
+     * @param champion_used
      * @param csCount
      * @param towersTaken
      * @param won 
      * @lastupdate 8/26/12 10:46 AM
      */
-    public PlayerCurrGameStats(int physical_dmg, int physical_hits_num, int physical_miss_num, int spell_cast_num, int spell_dmg, int kills, int deaths, int assists, int first_hit_kills, int time_played, int exp_earned, int ip_earned, Hero hero_used, int csCount, int towersTaken, boolean won){
+    public PlayerCurrGameStats(int physical_dmg, int physical_hits_num, int physical_miss_num, int spell_cast_num, int spell_dmg, int kills, int deaths, int assists, int first_hit_kills, int time_played, int exp_earned, int ip_earned, Champion champion_used, int csCount, int towersTaken, boolean won){
         this.setAssists(assists);
         this.setFirst_hit_kills(first_hit_kills);
         this.setKills(kills);
@@ -46,7 +46,7 @@ public class PlayerCurrGameStats {
         this.setspell_dmg(spell_dmg);
         this.setTime_played(time_played);
         this.setExp_earned(exp_earned);
-        this.setHero_used(hero_used);
+        this.setChampion_used(champion_used);
         this.setIp_earned(ip_earned);
         this.setCsCount(csCount);
         this.setTowersTaken(towersTaken);
@@ -69,12 +69,12 @@ public class PlayerCurrGameStats {
      * @param time_played
      * @param exp_earned
      * @param ip_earned
-     * @param hero_used
+     * @param champion_used
      * @param csCount
      * @param towersTaken
      * @lastupdate 8/22/12 11:18 PM
      */
-    public void updatePlayerCurrGameStats(int physical_dmg, int physical_hits_num, int physical_miss_num, int spell_cast_num, int spell_dmg, int kills, int deaths, int assists, int first_hit_kills, int time_played, int exp_earned, int ip_earned, Hero hero_used, int csCount, int towersTaken, boolean won){
+    public void updatePlayerCurrGameStats(int physical_dmg, int physical_hits_num, int physical_miss_num, int spell_cast_num, int spell_dmg, int kills, int deaths, int assists, int first_hit_kills, int time_played, int exp_earned, int ip_earned, Champion champion_used, int csCount, int towersTaken, boolean won){
         this.setAssists(assists);
         this.setFirst_hit_kills(first_hit_kills);
         this.setKills(kills);
@@ -86,7 +86,7 @@ public class PlayerCurrGameStats {
         this.setspell_dmg(spell_dmg);
         this.setTime_played(time_played);
         this.setExp_earned(exp_earned);
-        this.setHero_used(hero_used);
+        this.setChampion_used(champion_used);
         this.setIp_earned(ip_earned);
         this.setCsCount(csCount);
         this.setTowersTaken(towersTaken);
@@ -94,7 +94,7 @@ public class PlayerCurrGameStats {
     }
     
 //==============================instance vars===================================
-    private Hero hero_used; //simulating the real game that you can see hero's portaits in the match result (can use HeroObj.getHeroProtrait()).
+    private Champion champion_used; //simulating the real game that you can see champion's portaits in the match result (can use ChampionObj.getChampionProtrait()).
     private int physical_dmg;
     private int physical_hits_num;
     private int physical_miss_num;
@@ -229,17 +229,17 @@ public class PlayerCurrGameStats {
     }
 
     /**
-     * @return the hero_used
+     * @return the champion_used
      */
-    public Hero getHero_used() {
-        return hero_used;
+    public Champion getChampion_used() {
+        return champion_used;
     }
 
     /**
-     * @param hero_used the hero_used to set
+     * @param champion_used the champion_used to set
      */
-    public void setHero_used(Hero hero_used) {
-        this.hero_used = hero_used;
+    public void setChampion_used(Champion champion_used) {
+        this.champion_used = champion_used;
     }
 
     /**

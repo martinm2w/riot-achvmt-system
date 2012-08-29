@@ -11,6 +11,10 @@ import player.*;
  */
 public class AchievementsHandler {
 //===============================constructor====================================
+    /**
+     * m2w: create the map of achievements with all achievements we currently have.
+     *      the achievement names are the keys. actual achievement objects are the values.
+     */
     public AchievementsHandler(){
         Achievement bigWinner = new Achv_BigWinner();
         Achv_Bruiser bruiser = new Achv_Bruiser();
@@ -22,6 +26,14 @@ public class AchievementsHandler {
         this.allAchvmnts.put(veteran.getAchv_name(), veteran);
     }
 //================================public========================================    
+    /**
+     * m2w: this wrapper method runs in the Match Process class's run match command
+     *      2. update player history stats, achievements, ip, exp, level.
+     *           this.updatePlayerHistStats();
+     *           this.updatePlayerAchvStats();     <------- here
+     *           this.updatePlayerIpandExp();
+     * @param player 
+     */
     public void checkAndRewardAchvAfterGame(Player player){
         this.updateAchvmntsStats(player);
         this.rewardFulfilledAchvmnts(player);
