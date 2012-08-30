@@ -47,7 +47,7 @@ public class Champions {
         return championesListObj;
     }
 //==============================instance vars===================================
-    public static HashMap<String, Champion> championsMap;
-    public static ArrayList<Champion> championesList;
+    public static HashMap<String, Champion> championsMap; //for searching champion Object by name string. (later use)
+    public static ArrayList<Champion> championesList;   //for giving different champs for each player while creating their CurrGameStats.
 //============================setters & getters=================================
 }

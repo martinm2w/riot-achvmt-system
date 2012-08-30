@@ -31,6 +31,12 @@ import java.util.*;
  */
 public class Player {
 //===============================constructor====================================
+    /**
+     * m2w: pass in a PlayerInfo to create player object, history and Achv_handlers 
+     *      are new, current game stats is null at this point, after a match it will
+     *      be assigned.
+     * @param info 
+     */
     public Player(PlayerInfo info){
         this.setInfo(info);
         hisStats = new PlayerHistoryStats();
@@ -91,7 +97,6 @@ public class Player {
         System.out.println();
     }
 //=================================private======================================
-
 //==============================instance vars===================================
     private PlayerInfo info;                    //player info, first name , last name , email, etc.
     private PlayerHistoryStats hisStats;        //player histroy info, total kills, total games, total times,  etc.
@@ -104,9 +109,6 @@ public class Player {
     private int next_level_exp = 480;           //exp required for level up.
     private int riotPoints;                     //player's riot points.
     private int influencePoints;                //player's influence points.
-    
-    private ArrayList<Champion> championList;   //player's championlist.
-    private ArrayList<SommonerSpell> sSpells;
 //============================setters & getters=================================
 
     /**
@@ -191,34 +193,6 @@ public class Player {
      */
     public void setInfluencePoints(int influencePoints) {
         this.influencePoints = influencePoints;
-    }
-
-    /**
-     * @return the championList
-     */
-    public ArrayList<Champion> getChampionList() {
-        return championList;
-    }
-
-    /**
-     * @param championList the championList to set
-     */
-    public void setChampionList(ArrayList<Champion> championList) {
-        this.championList = championList;
-    }
-
-    /**
-     * @return the sSpells
-     */
-    public ArrayList<SommonerSpell> getsSpells() {
-        return sSpells;
-    }
-
-    /**
-     * @param sSpells the sSpells to set
-     */
-    public void setsSpells(ArrayList<SommonerSpell> sSpells) {
-        this.sSpells = sSpells;
     }
 
     /**

@@ -8,14 +8,16 @@ package player;
 import Champion.*;
 
 /**
- *
+ * m2w: This class contains all stats for the current/last game. Every Player instance
+ *      have-a PlayerCurrGameStats Object. The object was passed to each player after 
+ *      each run of the game.
  * @author ruobo
  * @lastupdate Aug 17, 2012 
  */
 public class PlayerCurrGameStats {
 //===============================constructor====================================
     /**
-     * m2w: the current game stats should be passed to the java platform system to update the user profile/stats.
+     * m2w: the current game stats should be passed to the java platform to update the user's stats.
      * @param physical_dmg
      * @param physical_hits_num
      * @param physical_miss_num
@@ -54,9 +56,8 @@ public class PlayerCurrGameStats {
     }
 //================================public========================================    
 //=================================private======================================
-    
     /**
-     * M2w: update-able
+     * M2w: update-able, this method is just created for possible later use.
      * @param physical_dmg
      * @param physical_hits_num
      * @param physical_miss_num
@@ -92,10 +93,9 @@ public class PlayerCurrGameStats {
         this.setTowersTaken(towersTaken);
         this.setWon(won);
     }
-    
 //==============================instance vars===================================
     private Champion champion_used; //simulating the real game that you can see champion's portaits in the match result (can use ChampionObj.getChampionProtrait()).
-    private int physical_dmg;
+    private int physical_dmg;       
     private int physical_hits_num;
     private int physical_miss_num;
     private int spell_cast_num;
@@ -105,7 +105,7 @@ public class PlayerCurrGameStats {
     private int deaths;
     private int assists;
     private int first_hit_kills;
-    private int csCount;
+    private int csCount;            //monster+minion kills
     private int towersTaken;
     
     private int time_played;
@@ -113,7 +113,7 @@ public class PlayerCurrGameStats {
     private int ip_earned;
     
     private boolean won = false;
-    
+    //    private ArrayList<SommonerSpell> sSpells; //omitted for simplicity
 //============================setters & getters=================================
 
     /**
