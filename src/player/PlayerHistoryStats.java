@@ -9,16 +9,19 @@ import achievement.*;
 import java.util.*;
 
 /**
- *
+ * m2w: Every Player instance have a PlayerHistoryStats Object which contains
+ *      accumulated game stats from each game.
  * @author ruobo
  * @lastupdate Aug 17, 2012 
  */
 public class PlayerHistoryStats {
 //===============================constructor====================================
-    public PlayerHistoryStats(){
-        
-    }
 //================================public========================================        
+    /**
+     * M2W: This method updates the History stats using the PlayerCurrGameStats Object
+     *      that was passed in.
+     * @param currStats 
+     */
     public void updatePlayerHistoryStats(PlayerCurrGameStats currStats){
         games_played += 1;
         total_time_played += currStats.getTime_played();
