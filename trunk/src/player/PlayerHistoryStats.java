@@ -18,43 +18,44 @@ public class PlayerHistoryStats {
 //===============================constructor====================================
 //================================public========================================        
     /**
-     * M2W: This method updates the History stats using the PlayerCurrGameStats Object
+     * M2W: This method updates the player's History stats using the PlayerCurrGameStats Object
      *      that was passed in.
-     * @param currStats 
+     * @param currStats : just finished "current game's" stats
      */
     public void updatePlayerHistoryStats(PlayerCurrGameStats currStats){
-        games_played += 1;
-        total_time_played += currStats.getTime_played();
-        total_kills += currStats.getKills();
+        games_played += 1;                                                      //increase by 1 after each game 
+        total_time_played += currStats.getTime_played();                        //time accumulates
+        total_kills += currStats.getKills();                                    //kills in last game
         total_deaths += currStats.getDeaths();
         total_assists += currStats.getAssists();
-        max_kills = (currStats.getKills() > max_kills) ? currStats.getKills() : max_kills;
-        int currMaxDeath = (int)(Math.random()*(currStats.getDeaths()));
-        max_deaths = (currMaxDeath > max_deaths) ? currMaxDeath : max_deaths;
-        int currMaxDoubleKill = currStats.getKills()/2;
+        int currKills = currStats.getKills();
+        max_kills = (currKills > max_kills) ? currKills : max_kills;            //if last game's kill exceeds max kills in history stats, update the new max_kill amount
+        int currDeaths = currStats.getDeaths();
+        max_deaths = (currDeaths > max_deaths) ? currDeaths : max_deaths;       //same with deaths 
+        int currMaxDoubleKill = currStats.getKills()/2;                         //Double kills can at most be half of the kills in last game.
         double_kills = (int)(Math.random()*currMaxDoubleKill);
-        int currMaxTrippleKill = currStats.getKills()/3;
+        int currMaxTrippleKill = currStats.getKills()/3;                        //tripple kills at most 1/3.
         tripple_kills = (int)(Math.random()*currMaxTrippleKill);
-        int currMaxQuadraKill = currStats.getKills()/4;
+        int currMaxQuadraKill = currStats.getKills()/4;                         //  at most 1/4
         quadra_kills = (int)(Math.random()*currMaxQuadraKill);
-        int currMaxPentaKill = currStats.getKills()/5;
+        int currMaxPentaKill = currStats.getKills()/5;                          //  at most 1/5
         penta_kills = (int)(Math.random()*currMaxPentaKill);
         total_towers_takedowns += currStats.getTowersTaken();
-        if(currStats.hasWon()) {
-            total_wins += 1;
+        if(currStats.hasWon()) {                                                // if won total wins ++
+            total_wins++;
         }else{
-            total_losses += 1;
+            total_losses++;                                                     // else loss ++
         }
         total_cs += currStats.getCsCount();
         total_physical_dmg += currStats.getphysical_dmg();
-        total_spell_dmg += currStats.getspell_dmg();
+        total_spell_dmg += currStats.getspell_dmg();                            //accumulating
         int currAveDmg = (int)(currStats.getphysical_dmg() / currStats.getPhysical_hits_num());
-        largest_crit_dmg =  ( (currAveDmg*3) > largest_crit_dmg ) ? currAveDmg*3 : largest_crit_dmg;
-        total_gold_earned += currStats.getCsCount()*25;
-        healing_done += (int)(Math.random()*1000);
-        int currMaxKillSpree = (int)(Math.random()*(currStats.getKills()));
-        highest_killing_spree = (currMaxKillSpree> highest_killing_spree) ? currMaxKillSpree : highest_killing_spree;
-        Integer currTimes = champions_used_times.get(currStats.getChampion_used().getChampionName());
+        largest_crit_dmg =  ( (currAveDmg*3) > largest_crit_dmg ) ? currAveDmg*3 : largest_crit_dmg; //generated the crit dmg be 3 times average dmg.
+        total_gold_earned += currStats.getCsCount()*25;                         //assuming 25 g each cs, for simplicity
+        healing_done += (int)(Math.random()*1000);                              //ignoring the fact that there is support chars. for simplicity.
+        int currMaxKillSpree = (int)(Math.random()*(currStats.getKills()));     //killing spree will not exceeds total kills in last game.
+        highest_killing_spree = (currMaxKillSpree> highest_killing_spree) ? currMaxKillSpree : highest_killing_spree; // will update the max killing spree if larger than history record
+        Integer currTimes = champions_used_times.get(currStats.getChampion_used().getChampionName()); // getting track of champ used times
         if(currTimes == null){
             champions_used_times.put(currStats.getChampion_used().getChampionName(), 1);
         }else{
@@ -64,6 +65,9 @@ public class PlayerHistoryStats {
         
     }
     
+    /**
+     * m2w: this method is for the "clearstats(gameID)" command in MatchProcess class.
+     */
     public void clear(){
         games_played = 0;
         total_time_played = 0;
