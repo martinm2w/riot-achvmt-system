@@ -1,16 +1,22 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package player;
 
 /**
- * m2w: this class simulates the database saving user's info.
+ * m2w: this class simulates the database saving user's info, instead of getting data from DB, 
+ *      we here just get the PlayerInfo object in Player instance to get ones info.
  * @author ruobo
  * @lastupdate 8/17/12 9:06 PM
  */
 public class PlayerInfo {
 //===============================constructor====================================
+    /**
+     * m2w: pass in basic info to create a new player, just like register from the website.
+     * @param firstName
+     * @param lastName
+     * @param email
+     * @param loginID
+     * @param password
+     * @param gameID 
+     */
     public PlayerInfo(String firstName, String lastName, String email, String loginID, String password, String gameID){
         this.setEmail(email);
         this.setFirstName(firstName);
@@ -27,7 +33,7 @@ public class PlayerInfo {
     private String email;
     private String loginID;
     private String password;    //pw should be encripted, omitted for simplicity.
-    private String gameID;      //once set, can't change.
+    private String gameID;      //once set, can't change. setter is modified.
     
 //===========================setters & getters==================================
     /**
