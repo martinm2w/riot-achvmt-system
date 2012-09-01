@@ -6,6 +6,8 @@
 package player;
 
 import Champion.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * m2w: This class contains all stats for the current/last game. Every Player instance
@@ -36,63 +38,26 @@ public class PlayerCurrGameStats {
      * @param won 
      * @lastupdate 8/26/12 10:46 AM
      */
-    public PlayerCurrGameStats(int physical_dmg, int physical_hits_num, int physical_miss_num, int spell_cast_num, int spell_dmg, int kills, int deaths, int assists, int first_hit_kills, int time_played, int exp_earned, int ip_earned, Champion champion_used, int csCount, int towersTaken, boolean won){
-        this.setAssists(assists);
-        this.setFirst_hit_kills(first_hit_kills);
-        this.setKills(kills);
-        this.setDeaths(deaths);
-        this.setphysical_dmg(physical_dmg);
-        this.setPhysical_hits_num(physical_hits_num);
-        this.setPhysical_miss_num(physical_miss_num);
-        this.setSpell_cast_num(spell_cast_num);
-        this.setspell_dmg(spell_dmg);
-        this.setTime_played(time_played);
-        this.setExp_earned(exp_earned);
-        this.setChampion_used(champion_used);
-        this.setIp_earned(ip_earned);
-        this.setCsCount(csCount);
-        this.setTowersTaken(towersTaken);
-        this.setWon(won);
+    public PlayerCurrGameStats(HashMap<String, Object> currStatsMap){
+        this.setAssists((int)currStatsMap.get("assists"));
+        this.setFirst_hit_kills((int)currStatsMap.get("first_hit_kills"));
+        this.setKills((int)currStatsMap.get("kills"));
+        this.setDeaths((int)currStatsMap.get("deaths"));
+        this.setphysical_dmg((int)currStatsMap.get("physical_dmg"));
+        this.setPhysical_hits_num((int)currStatsMap.get("physical_hits_num"));
+        this.setPhysical_miss_num((int)currStatsMap.get("physical_miss_num"));
+        this.setSpell_cast_num((int)currStatsMap.get("spell_cast_num"));
+        this.setspell_dmg((int)currStatsMap.get("spell_dmg"));
+        this.setTime_played((int)currStatsMap.get("time_played"));
+        this.setExp_earned((int)currStatsMap.get("exp_earned"));
+        this.setChampion_used((Champion)currStatsMap.get("champion_used"));
+        this.setIp_earned((int)currStatsMap.get("ip_earned"));
+        this.setCs_Count((int)currStatsMap.get("cs_count"));
+        this.setTowers_taken((int)currStatsMap.get("towers_taken"));
+        this.setWon((boolean)currStatsMap.get("won"));
     }
 //================================public========================================    
 //=================================private======================================
-    /**
-     * M2w: update-able, this method is just created for possible later use.
-     * @param physical_dmg
-     * @param physical_hits_num
-     * @param physical_miss_num
-     * @param spell_cast_num
-     * @param spell_dmg
-     * @param kills
-     * @param deaths
-     * @param assists
-     * @param first_hit_kills
-     * @param time_played
-     * @param exp_earned
-     * @param ip_earned
-     * @param champion_used
-     * @param csCount
-     * @param towersTaken
-     * @lastupdate 8/22/12 11:18 PM
-     */
-    public void updatePlayerCurrGameStats(int physical_dmg, int physical_hits_num, int physical_miss_num, int spell_cast_num, int spell_dmg, int kills, int deaths, int assists, int first_hit_kills, int time_played, int exp_earned, int ip_earned, Champion champion_used, int csCount, int towersTaken, boolean won){
-        this.setAssists(assists);
-        this.setFirst_hit_kills(first_hit_kills);
-        this.setKills(kills);
-        this.setDeaths(deaths);
-        this.setphysical_dmg(physical_dmg);
-        this.setPhysical_hits_num(physical_hits_num);
-        this.setPhysical_miss_num(physical_miss_num);
-        this.setSpell_cast_num(spell_cast_num);
-        this.setspell_dmg(spell_dmg);
-        this.setTime_played(time_played);
-        this.setExp_earned(exp_earned);
-        this.setChampion_used(champion_used);
-        this.setIp_earned(ip_earned);
-        this.setCsCount(csCount);
-        this.setTowersTaken(towersTaken);
-        this.setWon(won);
-    }
 //==============================instance vars===================================
     private Champion champion_used; //simulating the real game that you can see champion's portaits in the match result (can use ChampionObj.getChampionProtrait()).
     private int physical_dmg;       
@@ -105,8 +70,8 @@ public class PlayerCurrGameStats {
     private int deaths;
     private int assists;
     private int first_hit_kills;
-    private int csCount;            //monster+minion kills
-    private int towersTaken;
+    private int cs_count;            //monster+minion kills
+    private int towers_taken;
     
     private int time_played;
     private int exp_earned;
@@ -301,29 +266,29 @@ public class PlayerCurrGameStats {
     /**
      * @return the csCount
      */
-    public int getCsCount() {
-        return csCount;
+    public int getCs_Count() {
+        return cs_count;
     }
 
     /**
      * @param csCount the csCount to set
      */
-    public void setCsCount(int csCount) {
-        this.csCount = csCount;
+    public void setCs_Count(int csCount) {
+        this.cs_count = csCount;
     }
 
     /**
      * @return the towersTaken
      */
-    public int getTowersTaken() {
-        return towersTaken;
+    public int getTowers_taken() {
+        return towers_taken;
     }
 
     /**
      * @param towersTaken the towersTaken to set
      */
-    public void setTowersTaken(int towersTaken) {
-        this.towersTaken = towersTaken;
+    public void setTowers_taken(int towersTaken) {
+        this.towers_taken = towersTaken;
     }
 
     /**

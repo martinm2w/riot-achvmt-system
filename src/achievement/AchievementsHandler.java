@@ -18,16 +18,23 @@ public class AchievementsHandler {
     /**
      * m2w: create the map of achievements with all achievements we currently have.
      *      the achievement names are the keys. actual achievement objects are the values.
+     *      -------new achievements should be added here.-------------
      */
     public AchievementsHandler(){
         Achievement bigWinner = new Achv_BigWinner();
         Achv_Bruiser bruiser = new Achv_Bruiser();
         Achv_SharpShooter sharpShooter= new Achv_SharpShooter();
         Achv_Veteran veteran = new Achv_Veteran();
+        Achv_TowerDown towerDown = new Achv_TowerDown();
+        Achv_TowerManiac towerManiac = new Achv_TowerManiac();
+        Achv_Assitant assistant = new Achv_Assitant();
         this.allAchvmnts.put(bigWinner.getAchv_name(), bigWinner);
         this.allAchvmnts.put(bruiser.getAchv_name(), bruiser);
         this.allAchvmnts.put(sharpShooter.getAchv_name(), sharpShooter);
         this.allAchvmnts.put(veteran.getAchv_name(), veteran);
+        this.allAchvmnts.put(towerDown.getAchv_name(), towerDown);
+        this.allAchvmnts.put(towerManiac.getAchv_name(), towerManiac);
+        this.allAchvmnts.put(assistant.getAchv_name(), assistant);
     }
 //================================public========================================    
     /**
@@ -123,7 +130,7 @@ class Achv_Bruiser extends Achievement {
 
 class Achv_SharpShooter extends Achievement {
     public Achv_SharpShooter(){
-        super("SharpShooter", 50);
+        super("Sharp Shooter", 50);
     }
     @Override
     public boolean checkAchvCriteria(Player player) {
@@ -147,6 +154,53 @@ class Achv_Veteran extends Achievement {
         if(player == null) return false;
         int gamesPlayed = player.getHisStats().getGames_played();
         if(gamesPlayed >= 1000){
+            return true;
+        }
+        return false;
+    }
+}
+
+class Achv_TowerDown extends Achievement {
+    public Achv_TowerDown(){
+        super("Tower Down", 80);
+    }
+    @Override
+    public boolean checkAchvCriteria(Player player) {
+        if(player == null) return false;
+        int towersTotal = player.getHisStats().getTotal_towers_takedowns();
+        if(towersTotal >= 30){
+            return true;
+        }
+        return false;
+    }
+}
+
+class Achv_TowerManiac extends Achievement {
+    public Achv_TowerManiac(){
+        super("Tower Maniac", 180);
+    }
+    @Override
+    public boolean checkAchvCriteria(Player player) {
+        if(player == null) return false;
+        int towersTotal = player.getHisStats().getTotal_towers_takedowns();
+        int totalGames = player.getHisStats().getTotal_wins() + player.getHisStats().getTotal_losses();
+        int average = (int)(towersTotal / totalGames);
+        if(average >= 3){
+            return true;
+        }
+        return false;
+    }
+}
+
+class Achv_Assitant extends Achievement {
+    public Achv_Assitant(){
+        super("Assitant", 80);
+    }
+    @Override
+    public boolean checkAchvCriteria(Player player) {
+        if(player == null) return false;
+        int assistsTotal = player.getHisStats().getTotal_assists();
+        if(assistsTotal >= 100){
             return true;
         }
         return false;

@@ -40,18 +40,18 @@ public class PlayerHistoryStats {
         quadra_kills = (int)(Math.random()*currMaxQuadraKill);
         int currMaxPentaKill = currStats.getKills()/5;                          //  at most 1/5
         penta_kills = (int)(Math.random()*currMaxPentaKill);
-        total_towers_takedowns += currStats.getTowersTaken();
+        total_towers_takedowns += currStats.getTowers_taken();
         if(currStats.hasWon()) {                                                // if won total wins ++
             total_wins++;
         }else{
             total_losses++;                                                     // else loss ++
         }
-        total_cs += currStats.getCsCount();
+        total_cs += currStats.getCs_Count();
         total_physical_dmg += currStats.getphysical_dmg();
         total_spell_dmg += currStats.getspell_dmg();                            //accumulating
         int currAveDmg = (int)(currStats.getphysical_dmg() / currStats.getPhysical_hits_num());
         largest_crit_dmg =  ( (currAveDmg*3) > largest_crit_dmg ) ? currAveDmg*3 : largest_crit_dmg; //generated the crit dmg be 3 times average dmg.
-        total_gold_earned += currStats.getCsCount()*25;                         //assuming 25 g each cs, for simplicity
+        total_gold_earned += currStats.getCs_Count()*25;                         //assuming 25 g each cs, for simplicity
         healing_done += (int)(Math.random()*1000);                              //ignoring the fact that there is support chars. for simplicity.
         int currMaxKillSpree = (int)(Math.random()*(currStats.getKills()));     //killing spree will not exceeds total kills in last game.
         highest_killing_spree = (currMaxKillSpree> highest_killing_spree) ? currMaxKillSpree : highest_killing_spree; // will update the max killing spree if larger than history record

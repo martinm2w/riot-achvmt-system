@@ -122,8 +122,8 @@ public class Game {
             String assistString = Integer.toString(blueP.getCurrStats().getAssists());
             String kdaString = killString + "\\" + deathString + "\\" + assistString;
             
-            String CsString = Integer.toString(blueP.getCurrStats().getCsCount());
-            String towersTaken = Integer.toString(blueP.getCurrStats().getTowersTaken());
+            String CsString = Integer.toString(blueP.getCurrStats().getCs_Count());
+            String towersTaken = Integer.toString(blueP.getCurrStats().getTowers_taken());
                     
             System.out.print( champion + "    \t" + bluePgameID + "    \t" + kdaString + "    \t" + "items" + "    \t" + CsString + "        \t" + towersTaken + "    \t\n");
         }
@@ -139,8 +139,8 @@ public class Game {
             String assistString = Integer.toString(PurpleP.getCurrStats().getAssists());
             String kdaString = killString + "\\" + deathString + "\\" + assistString;
             
-            String CsString = Integer.toString(PurpleP.getCurrStats().getCsCount());
-            String towersTaken = Integer.toString(PurpleP.getCurrStats().getTowersTaken());
+            String CsString = Integer.toString(PurpleP.getCurrStats().getCs_Count());
+            String towersTaken = Integer.toString(PurpleP.getCurrStats().getTowers_taken());
                     
             //stats
             System.out.print( champion + "    \t" + PurplePgameID + "    \t" + kdaString + "    \t" + "items" + "    \t" + CsString + "        \t" + towersTaken + "    \t\n");
@@ -190,8 +190,26 @@ public class Game {
                 won = true;
             }
             //create currstats object, give it to each player
-            PlayerCurrGameStats curStats = new PlayerCurrGameStats(physical_dmg, physical_hits_num, physical_miss_num, spell_cast_num, spell_dmg, kills, deaths, assists, first_hit_kills, time_played, exp_earned, ip_earned, Champions.championesList.get(i), csCount, towersTaken, won);
-            p.setCurrStats(curStats);
+            HashMap<String, Object> currStatsMap = new HashMap<String, Object>();
+            currStatsMap.put("physical_dmg", physical_dmg);
+            currStatsMap.put("physical_hits_num", physical_hits_num);
+            currStatsMap.put("physical_miss_num", physical_miss_num);
+            currStatsMap.put("spell_cast_num", spell_cast_num);
+            currStatsMap.put("spell_dmg", spell_dmg);
+            currStatsMap.put("kills", kills);
+            currStatsMap.put("deaths", deaths);
+            currStatsMap.put("assists", assists);
+            currStatsMap.put("first_hit_kills", first_hit_kills);
+            currStatsMap.put("time_played", time_played);
+            currStatsMap.put("exp_earned", exp_earned);
+            currStatsMap.put("ip_earned", ip_earned);
+            currStatsMap.put("champion_used", Champions.championesList.get(i));
+            currStatsMap.put("cs_count", csCount);
+            currStatsMap.put("towers_taken", towersTaken);
+            currStatsMap.put("won", won);
+            
+            PlayerCurrGameStats currStats = new PlayerCurrGameStats(currStatsMap);
+            p.setCurrStats(currStats);
         }
     }
     
@@ -234,8 +252,26 @@ public class Game {
                 won = true;
             }
             //create currstats object, give it to each player
-            PlayerCurrGameStats curStats = new PlayerCurrGameStats(physical_dmg, physical_hits_num, physical_miss_num, spell_cast_num, spell_dmg, kills, deaths, assists, first_hit_kills, time_played, exp_earned, ip_earned, Champions.championesList.get(i), csCount, towersTaken, won);
-            p.setCurrStats(curStats);
+            HashMap<String, Object> currStatsMap = new HashMap<String, Object>();
+            currStatsMap.put("physical_dmg", physical_dmg);
+            currStatsMap.put("physical_hits_num", physical_hits_num);
+            currStatsMap.put("physical_miss_num", physical_miss_num);
+            currStatsMap.put("spell_cast_num", spell_cast_num);
+            currStatsMap.put("spell_dmg", spell_dmg);
+            currStatsMap.put("kills", kills);
+            currStatsMap.put("deaths", deaths);
+            currStatsMap.put("assists", assists);
+            currStatsMap.put("first_hit_kills", first_hit_kills);
+            currStatsMap.put("time_played", time_played);
+            currStatsMap.put("exp_earned", exp_earned);
+            currStatsMap.put("ip_earned", ip_earned);
+            currStatsMap.put("champion_used", Champions.championesList.get(i));
+            currStatsMap.put("cs_count", csCount);
+            currStatsMap.put("towers_taken", towersTaken);
+            currStatsMap.put("won", won);
+            
+            PlayerCurrGameStats currStats = new PlayerCurrGameStats(currStatsMap);
+            p.setCurrStats(currStats);
         }
     }
 //==============================instance vars===================================
@@ -246,6 +282,7 @@ public class Game {
     private boolean blueWins = false;
     private int totalBlueKills = 0;
     private int totalPurpleKills = 0;
+    
 //============================setters & getters=================================
 
     /**
