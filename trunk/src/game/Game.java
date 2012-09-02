@@ -58,15 +58,15 @@ public class Game {
         int towersTakenPurple = 0;
         if(isBlueWins()){
             //if blue team wins, given blue team 20 more kills
-            setTotalBlueKills((int)(Math.random()*50)+20);
-            setTotalPurpleKills((int)(Math.random()*50));
+            setTotalBlueKills((int)(Math.random()*30)+20);
+            setTotalPurpleKills((int)(Math.random()*30));
             //if blue wins will have at least 5 towers down.
             towersTakenBlue = (int)(Math.random()*6)+5;
             towersTakenPurple = (int)(Math.random()*11);
         }else{
             //else give purple team 20 more kills.
-            setTotalBlueKills((int)(Math.random()*50));
-            setTotalPurpleKills((int)(Math.random()*50)+20);
+            setTotalBlueKills((int)(Math.random()*30));
+            setTotalPurpleKills((int)(Math.random()*30)+20);
             
             //if purple wins will have at least 5 towers down.
             towersTakenPurple = (int)(Math.random()*6)+5;
