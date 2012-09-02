@@ -39,22 +39,22 @@ public class PlayerCurrGameStats {
      * @lastupdate 8/26/12 10:46 AM
      */
     public PlayerCurrGameStats(HashMap<String, Object> currStatsMap){
-        this.setAssists((int)currStatsMap.get("assists"));
-        this.setFirst_hit_kills((int)currStatsMap.get("first_hit_kills"));
-        this.setKills((int)currStatsMap.get("kills"));
-        this.setDeaths((int)currStatsMap.get("deaths"));
-        this.setphysical_dmg((int)currStatsMap.get("physical_dmg"));
-        this.setPhysical_hits_num((int)currStatsMap.get("physical_hits_num"));
-        this.setPhysical_miss_num((int)currStatsMap.get("physical_miss_num"));
-        this.setSpell_cast_num((int)currStatsMap.get("spell_cast_num"));
-        this.setspell_dmg((int)currStatsMap.get("spell_dmg"));
-        this.setTime_played((int)currStatsMap.get("time_played"));
-        this.setExp_earned((int)currStatsMap.get("exp_earned"));
+        this.setAssists((Integer)currStatsMap.get("assists"));
+        this.setFirst_hit_kills((Integer)currStatsMap.get("first_hit_kills"));
+        this.setKills((Integer)currStatsMap.get("kills"));
+        this.setDeaths((Integer)currStatsMap.get("deaths"));
+        this.setphysical_dmg((Integer)currStatsMap.get("physical_dmg"));
+        this.setPhysical_hits_num((Integer)currStatsMap.get("physical_hits_num"));
+        this.setPhysical_miss_num((Integer)currStatsMap.get("physical_miss_num"));
+        this.setSpell_cast_num((Integer)currStatsMap.get("spell_cast_num"));
+        this.setspell_dmg((Integer)currStatsMap.get("spell_dmg"));
+        this.setTime_played((Integer)currStatsMap.get("time_played"));
+        this.setExp_earned((Integer)currStatsMap.get("exp_earned"));
         this.setChampion_used((Champion)currStatsMap.get("champion_used"));
-        this.setIp_earned((int)currStatsMap.get("ip_earned"));
-        this.setCs_Count((int)currStatsMap.get("cs_count"));
-        this.setTowers_taken((int)currStatsMap.get("towers_taken"));
-        this.setWon((boolean)currStatsMap.get("won"));
+        this.setIp_earned((Integer)currStatsMap.get("ip_earned"));
+        this.setCs_Count((Integer)currStatsMap.get("cs_count"));
+        this.setTowers_taken((Integer)currStatsMap.get("towers_taken"));
+        this.setWon((Boolean)currStatsMap.get("won"));
     }
 //================================public========================================    
 //=================================private======================================
